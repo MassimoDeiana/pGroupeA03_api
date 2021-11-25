@@ -1,10 +1,8 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel.DataAnnotations.Schema;
+using System.Collections.Generic;   
 using System.Data;
 using System.Data.SqlClient;
 using System.Linq;
-using System.Reflection;
 
 namespace Infrastructure.SqlServer.Utils
 {
@@ -16,10 +14,12 @@ namespace Infrastructure.SqlServer.Utils
 
         private List<string> _tableColumns = new List<string>();
 
-        protected EntityRepository(IDomainFactory<T> factory, string tableName)
+        private List<object> _data;
+
+        protected EntityRepository(IDomainFactory<T> factory)
         {
             _factory = factory;
-            _tableName = tableName;
+            _tableName = typeof(T).Name.ToLower();
             FillTableColumns();
         }
 
@@ -81,68 +81,50 @@ namespace Infrastructure.SqlServer.Utils
             return reader.Read() ? _factory.CreateFromSqlReader(reader) : default;
         }
 
-        public T Create(T t)
-        {
+        public abstract T Create(T t);
+        /*{
             using var connection = Database.GetConnection();
             connection.Open();
             
-            var text = $@"INSERT INTO {_tableName}(";
-            foreach (var column in _tableColumns.Skip(1))
-            {
-                if (column == _tableColumns.Last())
-                {
-                    text += $@"{column})
-                        OUTPUT INSERTED {_tableColumns[0]}
-                        VALUES";
-                }
-                else
-                {
-                    text += $@"{column}, ";
-                }
-            }
-
-            foreach (var column in _tableColumns.Skip(1))
-            {
-                if (column == _tableColumns.Last())
-                {
-                    text += $@"{column})";
-                }
-                else
-                {
-                    text += $@"@{column}, ";
-                }
-            }
+            var strCol = string.Join(",", _tableColumns);
+            var strParam = string.Join(",", _tableColumns.Select(r => "@" + r));
+            
+            var sql = $"INSERT INTO {_tableName} ({strCol}) VALUES ({strParam})";
 
             var command = new SqlCommand
             {
                 Connection = connection,
-                CommandText = text
+                CommandText = sql
             };
-
+            
             foreach (var column in _tableColumns.Skip(1))
             {
                // command.Parameters.AddWithValue("@" + column, t.column);
             }
-            Console.WriteLine(t.GetType());
             var type = t.GetType();
             var properties = type.GetProperties();
             Console.WriteLine(properties[1].Name);
-            /*foreach (var property in t.GetType().GetProperties())
+            var i = 1;
+            foreach (var column in _tableColumns.Skip(1))
             {
-                // Gets the first attribute of type ColumnAttribute for the property
-                // As you defined AllowMultiple as true, you should loop through all attributes instead.
-                var attribute = property.GetCustomAttributes(false).OfType<ColumnAttribute>().FirstOrDefault();
-                if (attribute != null)
-                {
-                    Console.WriteLine(attribute.Name);    // Prints AGE_FIELD
-                }
-            }*/
-
+               // command.Parameters.AddWithValue($@"@{column}", _data[i]);
+                i++;
+            }
+            /*foreach (var property in t.GetType().GetProperties())
+                      {
+                          // Gets the first attribute of type ColumnAttribute for the property
+                          // As you defined AllowMultiple as true, you should loop through all attributes instead.
+                          var attribute = property.GetCustomAttributes(false).OfType<ColumnAttribute>().FirstOrDefault();
+                          if (attribute != null)
+                          {
+                              Console.WriteLine(attribute.Name);    // Prints AGE_FIELD
+                          }
+                      }#1#
             //t.Id = (int) command.ExecuteScalar();
-            
+            command.ExecuteScalar();
 
             return t;
-        }
+        }*/
 
         public bool Delete(string request, int id, string col)
         {
