@@ -1,13 +1,27 @@
-﻿using System.Data.SqlClient;
+﻿using System;
+using System.Data.SqlClient;
+using System.IO;
+using System.Text;
 
 namespace Infrastructure.SqlServer
 {
     public class Database
     {
-        private const string ConnectionString = "Server=MSI;Database=dbgroupeA03;Integrated Security=SSPI";
+        private const string FileName = @"..\connection.txt";
+
+        private static string _connectionString; // = "Server=DESKTOP-AQEOHNM;Database=dbgroupeA03;Integrated Security=SSPI";
+        
+        
+        
         public static SqlConnection GetConnection()
         {
-            return new SqlConnection(ConnectionString);
+            using (var streamReader = File.OpenText(FileName))
+            {
+                var text = streamReader.ReadToEnd();
+                _connectionString = text;
+            }
+            
+            return new SqlConnection(_connectionString);
         } 
     }
 }
