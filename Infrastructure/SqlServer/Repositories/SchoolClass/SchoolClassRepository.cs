@@ -1,7 +1,6 @@
-﻿
-using System.Collections.Generic;
-using System.Data.SqlClient;
+﻿using System.Data.SqlClient;
 using Infrastructure.SqlServer.Utils;
+using NotImplementedException = System.NotImplementedException;
 
 namespace Infrastructure.SqlServer.Repositories.SchoolClass
 {
@@ -29,6 +28,11 @@ namespace Infrastructure.SqlServer.Repositories.SchoolClass
             t.Id = (int) command.ExecuteScalar();
 
             return t;
+        }
+
+        public override bool Update(int id, Domain.SchoolClass t)
+        {
+            throw new NotImplementedException();
         }
     }
 }

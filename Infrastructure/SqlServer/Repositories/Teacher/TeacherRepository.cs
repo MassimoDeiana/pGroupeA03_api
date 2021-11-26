@@ -50,5 +50,10 @@ namespace Infrastructure.SqlServer.Repositories.Teacher
 
             return t;
         }
+
+        public override bool Update(int id, Domain.Teacher t)
+        {
+            throw new NotImplementedException();
+        }
     }
 }

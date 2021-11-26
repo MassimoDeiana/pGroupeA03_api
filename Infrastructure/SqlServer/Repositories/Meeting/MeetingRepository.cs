@@ -1,5 +1,6 @@
 ﻿using System.Data.SqlClient;
 using Infrastructure.SqlServer.Utils;
+using NotImplementedException = System.NotImplementedException;
 
 namespace Infrastructure.SqlServer.Repositories.Meeting
 {
@@ -26,6 +27,11 @@ namespace Infrastructure.SqlServer.Repositories.Meeting
             t.IdMeeting = (int) command.ExecuteScalar();
 
             return t;
+        }
+
+        public override bool Update(int id, Domain.Meeting t)
+        {
+            throw new NotImplementedException();
         }
     }
 }

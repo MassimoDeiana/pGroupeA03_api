@@ -19,17 +19,6 @@ namespace Application.UseCases.Student
         {
             var students = _studentRepository.GetAll();
 
-            /* EQUIVALENT A LA LIGNE EN DESSOUS
-             var output = new List<OutputDtoStudent>();
-             
-                foreach (Domain.Student student in students)
-                {
-                    output.Add(Mapper.GetInstance().Map<OutputDtoStudent>(student));
-                }
-            
-            return output;
-            */
-
             return students.Select(student => Mapper.GetInstance().Map<OutputDtoStudent>(student)).ToList();
         }
     }

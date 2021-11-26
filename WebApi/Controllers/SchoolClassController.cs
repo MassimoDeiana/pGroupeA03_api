@@ -3,7 +3,6 @@ using System.Collections.Generic;
 using System.Net;
 using Application.UseCases.SchoolClass;
 using Application.UseCases.SchoolClass.Dtos;
-using Infrastructure.SqlServer.Repositories.SchoolClass;
 using Microsoft.AspNetCore.Mvc;
 
 namespace pGroupeA03_api.Controllers

@@ -1,6 +1,5 @@
 ﻿using Application.UseCases.SchoolClass.Dtos;
 using Application.UseCases.Utils;
-using Infrastructure.SqlServer.Repositories.SchoolClass;
 using Infrastructure.SqlServer.Utils;
 
 namespace Application.UseCases.SchoolClass

@@ -2,7 +2,6 @@
 using System.Linq;
 using Application.UseCases.Teacher.Dtos;
 using Application.UseCases.Utils;
-using Infrastructure.SqlServer.Repositories.Teacher;
 using Infrastructure.SqlServer.Utils;
 
 namespace Application.UseCases.Teacher

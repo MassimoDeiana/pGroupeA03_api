@@ -1,5 +1,4 @@
-﻿using System;
-using System.Collections.Generic;   
+﻿using System.Collections.Generic;   
 using System.Data;
 using System.Data.SqlClient;
 
@@ -11,7 +10,7 @@ namespace Infrastructure.SqlServer.Utils
 
         private readonly string _tableName;
 
-        private List<string> _tableColumns = new List<string>();
+        private readonly List<string> _tableColumns = new();
 
         //private List<object> _data;
 
@@ -35,7 +34,6 @@ namespace Infrastructure.SqlServer.Utils
 
             foreach (DataRow rowColumn in schemaColumns.Rows)
             {
-                Console.WriteLine(rowColumn[3].ToString());
                 _tableColumns.Add(rowColumn[3].ToString());
             }
         }
@@ -124,6 +122,8 @@ namespace Infrastructure.SqlServer.Utils
 
             return t;
         }*/
+
+        public abstract bool Update(int id, T t);
 
         public bool Delete(int id)
         {

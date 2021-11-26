@@ -1,7 +1,5 @@
 ﻿using System.Data.SqlClient;
-using Infrastructure.SqlServer.Repositories.Teacher;
 using Infrastructure.SqlServer.Utils;
-using NotImplementedException = System.NotImplementedException;
 
 namespace Infrastructure.SqlServer.Repositories.Meeting
 {

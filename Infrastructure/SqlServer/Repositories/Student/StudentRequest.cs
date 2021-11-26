@@ -2,7 +2,7 @@
 {
     public partial class StudentRepository
     {
-        private const string TableName = "student";
+        public const string TableName = "student";
 
         public const string ColId = "idstudent",
             ColName = "name",
@@ -11,7 +11,11 @@
             ColMail = "mail",
             ColIdClass = "idclass";
         
-        private static readonly string ReqCreate = $"INSERT INTO {TableName}({ColName}, {ColFirstname}, {ColBirthdate}, {ColMail}, {ColIdClass}) OUTPUT INSERTED.{ColId} " +
+        public static readonly string ReqCreate = $"INSERT INTO {TableName}({ColName}, {ColFirstname}, {ColBirthdate}, {ColMail}, {ColIdClass}) OUTPUT INSERTED.{ColId} " +
                                                   $"VALUES(@{ColName}, @{ColFirstname}, @{ColBirthdate}, @{ColMail}, @{ColIdClass})";
+        
+        public static readonly string ReqUpdate = $"UPDATE {TableName} SET {ColName} = @{ColName}, {ColFirstname} = @{ColFirstname}, " +
+                                                  $"{ColBirthdate} = @{ColBirthdate}, {ColMail} = @{ColMail}, {ColIdClass} = @{ColIdClass} " +
+                                                  $" WHERE {ColId} = @{ColId}";
     }
 }

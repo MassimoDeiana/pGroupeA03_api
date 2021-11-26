@@ -5,7 +5,6 @@ using Application.Helpers;
 using Application.Services;
 using Application.UseCases.Teacher;
 using Application.UseCases.Teacher.Dtos;
-using Infrastructure.SqlServer.Repositories.Teacher;
 using Microsoft.AspNetCore.Mvc;
 
 namespace pGroupeA03_api.Controllers

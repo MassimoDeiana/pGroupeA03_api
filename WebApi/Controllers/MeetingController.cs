@@ -3,7 +3,6 @@ using System.Collections.Generic;
 using System.Net;
 using Application.UseCases.Meeting;
 using Application.UseCases.Meeting.Dtos;
-using Infrastructure.SqlServer.Repositories.Meeting;
 using Microsoft.AspNetCore.Mvc;
 
 namespace pGroupeA03_api.Controllers

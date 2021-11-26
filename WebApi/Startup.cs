@@ -66,9 +66,10 @@ namespace pGroupeA03_api
                 //STUDENT
                 services.AddSingleton<UseCaseGetStudent>();
                 services.AddSingleton<UseCaseCreateStudent>();
-                services.AddSingleton<UseCaseDeleteStudent>();
                 services.AddSingleton<UseCaseGenerateStudent>();
-                
+                services.AddSingleton<UseCaseUpdateStudent>();
+                services.AddSingleton<UseCaseDeleteStudent>();
+
                 //SCHOOLCLASS
                 services.AddSingleton<UseCaseCreateSchoolClass>();
                 services.AddSingleton<UseCaseGetSchoolClass>();
@@ -78,9 +79,9 @@ namespace pGroupeA03_api
                 //MEETING
                 
                 services.AddSingleton<UseCaseCreateMeeting>();
-                services.AddSingleton<UseCaseDeleteMeeting>();
                 services.AddSingleton<UseCaseGetMeeting>();
                 services.AddSingleton<UseCaseGenerateMeeting>();
+                services.AddSingleton<UseCaseDeleteMeeting>();
 
                 services.AddControllers();
             
