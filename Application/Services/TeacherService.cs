@@ -7,6 +7,7 @@ using Application.Helpers;
 using Application.UseCases.Teacher.Dtos;
 using Domain;
 using Infrastructure.SqlServer.Repositories.Teacher;
+using Infrastructure.SqlServer.Utils;
 using Microsoft.Extensions.Options;
 using Microsoft.IdentityModel.Tokens;
 
@@ -14,10 +15,10 @@ namespace Application.Services
 {
     public class TeacherService : ITeacherService
     {
-        private readonly ITeacherRepository _teacherRepository;
+        private readonly IEntityRepository<Teacher> _teacherRepository;
         private readonly AppSettings _appSettings;
 
-        public TeacherService(ITeacherRepository teacherRepository, IOptions<AppSettings> appSettings)
+        public TeacherService(IEntityRepository<Teacher> teacherRepository, IOptions<AppSettings> appSettings)
         {
             _teacherRepository = teacherRepository;
             _appSettings = appSettings.Value;

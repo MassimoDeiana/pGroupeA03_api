@@ -38,12 +38,11 @@ namespace pGroupeA03_api.Controllers
         {
             try
             {
-                return StatusCode(201, _useCaseGenerateStudent.Execute(StudentRepository.ReqDelete,
+                return StatusCode(201, _useCaseGenerateStudent.Execute(
                     new InputDtoGenerateStudent
                     {
                         IdStudent = id
-                    },
-                    StudentRepository.ColId));
+                    }));
             }
             catch (Exception e)
             {
@@ -76,11 +75,9 @@ namespace pGroupeA03_api.Controllers
         public ActionResult Delete(int id)
         {
             if (_useCaseDeleteStudent.Execute(
-                StudentRepository.ReqDelete,
                 new InputDtoGenerateStudent {
                     IdStudent = id
-                },
-                StudentRepository.ColId)) 
+                })) 
             {
                 return Ok();
             }

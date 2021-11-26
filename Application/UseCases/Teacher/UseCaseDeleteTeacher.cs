@@ -1,19 +1,20 @@
 ﻿using Application.UseCases.Teacher.Dtos;
 using Application.UseCases.Utils;
 using Infrastructure.SqlServer.Repositories.Teacher;
+using Infrastructure.SqlServer.Utils;
 
 namespace Application.UseCases.Teacher
 {
     public class UseCaseDeleteTeacher : IDeleting<InputDtoGenerateTeacher>
     {
-        private readonly ITeacherRepository _teacherRepository;
+        private readonly IEntityRepository<Domain.Teacher> _teacherRepository;
 
-        public UseCaseDeleteTeacher(ITeacherRepository teacherRepository)
+        public UseCaseDeleteTeacher(IEntityRepository<Domain.Teacher> teacherRepository)
         {
             _teacherRepository = teacherRepository;
         }
 
-        public bool Execute(string request, InputDtoGenerateTeacher dto, string col)
+        public bool Execute(InputDtoGenerateTeacher dto)
         {
             return _teacherRepository.Delete(dto.IdTeacher);
         }

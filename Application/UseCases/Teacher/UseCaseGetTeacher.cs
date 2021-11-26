@@ -3,14 +3,15 @@ using System.Linq;
 using Application.UseCases.Teacher.Dtos;
 using Application.UseCases.Utils;
 using Infrastructure.SqlServer.Repositories.Teacher;
+using Infrastructure.SqlServer.Utils;
 
 namespace Application.UseCases.Teacher
 {
     public class UseCaseGetTeacher : IQuery<List<OutputDtoTeacher>>
     {
-        private readonly ITeacherRepository _teacherRepository;
+        private readonly IEntityRepository<Domain.Teacher> _teacherRepository;
         
-        public UseCaseGetTeacher(ITeacherRepository teacherRepository)
+        public UseCaseGetTeacher(IEntityRepository<Domain.Teacher> teacherRepository)
         {
             _teacherRepository = teacherRepository;
         }

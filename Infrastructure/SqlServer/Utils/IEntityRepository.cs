@@ -1,5 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 
 namespace Infrastructure.SqlServer.Utils
 {
@@ -7,10 +6,10 @@ namespace Infrastructure.SqlServer.Utils
     {
         public List<T> GetAll();
 
-        T GetById(string request, int id, string col);
+        T GetById(int id);
 
         T Create(T t);
         
-        bool Delete(string request, int id, string col);
+        bool Delete(int id);
     }
 }

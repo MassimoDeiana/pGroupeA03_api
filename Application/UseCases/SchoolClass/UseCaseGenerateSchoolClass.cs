@@ -7,7 +7,6 @@ namespace Application.UseCases.SchoolClass
 {
     public class UseCaseGenerateSchoolClass : IQueryFiltering<OutputDtoSchoolClass, InputDtoGenerateSchoolClass>
     {
-        // private readonly ISchoolClassRepository _schoolClassRepository;
         private readonly IEntityRepository<Domain.SchoolClass> _schoolClassRepository;
 
         public UseCaseGenerateSchoolClass(IEntityRepository<Domain.SchoolClass> schoolClassRepository)
@@ -15,9 +14,9 @@ namespace Application.UseCases.SchoolClass
             _schoolClassRepository = schoolClassRepository;
         }
 
-        public OutputDtoSchoolClass Execute(string request, InputDtoGenerateSchoolClass dto, string col)
+        public OutputDtoSchoolClass Execute(InputDtoGenerateSchoolClass dto)
         {
-            var output = _schoolClassRepository.GetById(request, dto.IdSchoolClass, col);
+            var output = _schoolClassRepository.GetById(dto.IdSchoolClass);
 
             return Mapper.GetInstance().Map<OutputDtoSchoolClass>(output);
         }

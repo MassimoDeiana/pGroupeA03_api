@@ -2,6 +2,6 @@
 {
     public interface IQueryFiltering<out TO, in TI>
     {
-        TO Execute(string request, TI dto, string col);
+        TO Execute(TI dto);
     }
 }

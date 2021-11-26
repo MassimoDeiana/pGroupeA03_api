@@ -1,18 +1,16 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
 using Application.UseCases.Student.Dtos;
-using Application.UseCases.Teacher.Dtos;
 using Application.UseCases.Utils;
-using Infrastructure.SqlServer.Repositories.Student;
+using Infrastructure.SqlServer.Utils;
 
 namespace Application.UseCases.Student
 {
     public class UseCaseGetStudent : IQuery<List<OutputDtoStudent>>
     {
-        private readonly IStudentRepository _studentRepository;
-
-
-        public UseCaseGetStudent(IStudentRepository studentRepository)
+        private readonly IEntityRepository<Domain.Student> _studentRepository;
+        
+        public UseCaseGetStudent(IEntityRepository<Domain.Student> studentRepository)
         {
             _studentRepository = studentRepository;
         }

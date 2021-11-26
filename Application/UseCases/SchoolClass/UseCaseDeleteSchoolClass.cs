@@ -7,7 +7,6 @@ namespace Application.UseCases.SchoolClass
 {
     public class UseCaseDeleteSchoolClass : IDeleting<InputDtoGenerateSchoolClass>
     {
-        // private readonly ISchoolClassRepository _schoolClassRepository;
         private readonly IEntityRepository<Domain.SchoolClass> _schoolClassRepository;
 
         public UseCaseDeleteSchoolClass(IEntityRepository<Domain.SchoolClass> schoolClassRepository)
@@ -15,9 +14,9 @@ namespace Application.UseCases.SchoolClass
             _schoolClassRepository = schoolClassRepository;
         }
 
-        public bool Execute(string request, InputDtoGenerateSchoolClass dto, string col)
+        public bool Execute( InputDtoGenerateSchoolClass dto)
         {
-            return _schoolClassRepository.Delete(request, dto.IdSchoolClass, col);
+            return _schoolClassRepository.Delete(dto.IdSchoolClass);
         }
     }
 }

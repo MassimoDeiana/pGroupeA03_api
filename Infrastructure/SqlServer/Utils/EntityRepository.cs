@@ -2,7 +2,6 @@
 using System.Collections.Generic;   
 using System.Data;
 using System.Data.SqlClient;
-using System.Linq;
 
 namespace Infrastructure.SqlServer.Utils
 {
@@ -14,7 +13,7 @@ namespace Infrastructure.SqlServer.Utils
 
         private List<string> _tableColumns = new List<string>();
 
-        private List<object> _data;
+        //private List<object> _data;
 
         protected EntityRepository(IDomainFactory<T> factory)
         {
@@ -63,7 +62,7 @@ namespace Infrastructure.SqlServer.Utils
             return entities;
         }
         
-        public T GetById(string request, int id, string col)
+        public T GetById(int id)
         {
             using var connection = Database.GetConnection();
             connection.Open();
@@ -126,7 +125,7 @@ namespace Infrastructure.SqlServer.Utils
             return t;
         }*/
 
-        public bool Delete(string request, int id, string col)
+        public bool Delete(int id)
         {
             using var connection = Database.GetConnection();
             connection.Open();
@@ -134,10 +133,11 @@ namespace Infrastructure.SqlServer.Utils
             var command = new SqlCommand
             {
                 Connection = connection,
-                CommandText = request
+                CommandText = $@"DELETE FROM {_tableName} WHERE {_tableColumns[0]} = @{_tableColumns[0]}"
             };
+
+            command.Parameters.AddWithValue("@" + _tableColumns[0], id);
             
-            command.Parameters.AddWithValue("@" + col, id);
             return command.ExecuteNonQuery() > 0;
         }
     }

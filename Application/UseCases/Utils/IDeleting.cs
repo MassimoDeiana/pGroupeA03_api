@@ -2,6 +2,6 @@
 {
     public interface IDeleting<in T>
     {
-        bool Execute(string request, T dto, string col);
+        bool Execute(T dto);
     }
 }

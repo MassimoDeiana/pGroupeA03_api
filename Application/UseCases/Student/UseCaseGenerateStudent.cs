@@ -1,20 +1,20 @@
 ﻿using Application.UseCases.Student.Dtos;
 using Application.UseCases.Utils;
-using Infrastructure.SqlServer.Repositories.Student;
+using Infrastructure.SqlServer.Utils;
 
 namespace Application.UseCases.Student
 {
     public class UseCaseGenerateStudent : IQueryFiltering<OutputDtoStudent,InputDtoGenerateStudent>
     {
-        private readonly IStudentRepository _studentRepository;
+        private readonly IEntityRepository<Domain.Student> _studentRepository;
 
-        public UseCaseGenerateStudent(IStudentRepository studentRepository)
+        public UseCaseGenerateStudent(IEntityRepository<Domain.Student> studentRepository)
         {
             _studentRepository = studentRepository;
         }
 
 
-        public OutputDtoStudent Execute(string request, InputDtoGenerateStudent dto, string col)
+        public OutputDtoStudent Execute(InputDtoGenerateStudent dto)
         {
             var output = _studentRepository.GetById(dto.IdStudent);
 

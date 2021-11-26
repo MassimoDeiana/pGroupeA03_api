@@ -1,74 +1,11 @@
-﻿using System.Collections.Generic;
-using System.Data;
-using System.Data.SqlClient;
+﻿using System.Data.SqlClient;
 using Infrastructure.SqlServer.Utils;
+using NotImplementedException = System.NotImplementedException;
 
 namespace Infrastructure.SqlServer.Repositories.Teacher
 {
-    public partial class TeacherRepository : ITeacherRepository
+    public partial class TeacherRepository : EntityRepository<Domain.Teacher>
     {
-        
-        private readonly IDomainFactory<Domain.Teacher> _teacherFactory = new TeacherFactory();
-
-        public List<Domain.Teacher> GetAll()
-        {
-            var teachers = new List<Domain.Teacher>();
-
-            using var connection = Database.GetConnection();
-            connection.Open();
-            var command = new SqlCommand
-            {
-                Connection = connection,
-                CommandText = ReqGetAll
-            };
-
-            var reader = command.ExecuteReader(CommandBehavior.CloseConnection);
-
-            while (reader.Read())
-            {
-                teachers.Add(_teacherFactory.CreateFromSqlReader(reader));
-            }
-
-            return teachers;
-        }
-
-        public Domain.Teacher GetById(int id)
-        {
-            using var connection = Database.GetConnection();
-            connection.Open();
-            var command = new SqlCommand
-            {
-                Connection = connection,
-                CommandText = ReqGetById
-            };
-            command.Parameters.AddWithValue("@" + ColId, id);
-
-            var reader = command.ExecuteReader(CommandBehavior.CloseConnection);
-            
-            return reader.Read() ? _teacherFactory.CreateFromSqlReader(reader) : null;
-        }
-        
-        public Domain.Teacher Create(Domain.Teacher teacher)
-        {
-            using var connection = Database.GetConnection();
-            connection.Open();
-            
-            var command = new SqlCommand
-            {
-                Connection = connection,
-                CommandText = ReqCreate
-            };
-            
-            command.Parameters.AddWithValue("@" + ColName, teacher.Name);
-            command.Parameters.AddWithValue("@" + ColFirstName, teacher.FirstName);
-            command.Parameters.AddWithValue("@" + ColBirthDate, teacher.BirthDate);
-            command.Parameters.AddWithValue("@" + ColMail, teacher.Mail);
-            command.Parameters.AddWithValue("@" + ColPassword, teacher.Password);
-
-            teacher.IdTeacher = (int) command.ExecuteScalar();
-
-            return teacher;
-        }
 /*
         public bool Update(int id, Domain.Teacher teacher)
         {
@@ -88,19 +25,30 @@ namespace Infrastructure.SqlServer.Repositories.Teacher
             return command.ExecuteNonQuery() > 0;
         }
 */
-        public bool Delete(int id)
+        public TeacherRepository(TeacherFactory factory) : base(factory)
+        {
+        }
+
+        public override Domain.Teacher Create(Domain.Teacher t)
         {
             using var connection = Database.GetConnection();
             connection.Open();
+            
             var command = new SqlCommand
             {
                 Connection = connection,
-                CommandText = ReqDelete
+                CommandText = ReqCreate
             };
+            
+            command.Parameters.AddWithValue("@" + ColName, t.Name);
+            command.Parameters.AddWithValue("@" + ColFirstName, t.FirstName);
+            command.Parameters.AddWithValue("@" + ColBirthDate, t.BirthDate);
+            command.Parameters.AddWithValue("@" + ColMail, t.Mail);
+            command.Parameters.AddWithValue("@" + ColPassword, t.Password);
 
-            command.Parameters.AddWithValue("@" + ColId, id);
-            return command.ExecuteNonQuery() > 0;
+            t.IdTeacher = (int) command.ExecuteScalar();
+
+            return t;
         }
-
     }
 }

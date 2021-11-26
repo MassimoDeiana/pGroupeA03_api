@@ -1,20 +1,19 @@
-﻿using System.Runtime.Serialization;
-using Application.UseCases.Student.Dtos;
+﻿using Application.UseCases.Student.Dtos;
 using Application.UseCases.Utils;
-using Infrastructure.SqlServer.Repositories.Student;
+using Infrastructure.SqlServer.Utils;
 
 namespace Application.UseCases.Student
 {
     public class UseCaseDeleteStudent : IDeleting<InputDtoGenerateStudent>
     {
-        private readonly IStudentRepository _studentRepository;
+        private readonly IEntityRepository<Domain.Student> _studentRepository;
 
-        public UseCaseDeleteStudent(IStudentRepository studentRepository)
+        public UseCaseDeleteStudent(IEntityRepository<Domain.Student> studentRepository)
         {
             _studentRepository = studentRepository;
         }
 
-        public bool Execute(string request, InputDtoGenerateStudent dto, string col)
+        public bool Execute(InputDtoGenerateStudent dto)
         {
             return _studentRepository.Delete(dto.IdStudent);
         }

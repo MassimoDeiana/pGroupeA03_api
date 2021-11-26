@@ -1,14 +1,14 @@
 ﻿using Application.UseCases.Teacher.Dtos;
 using Application.UseCases.Utils;
-using Infrastructure.SqlServer.Repositories.Teacher;
+using Infrastructure.SqlServer.Utils;
 
 namespace Application.UseCases.Teacher
 {
     public class UseCaseCreateTeacher : IWriting<OutputDtoTeacher,InputDtoTeacher>
     {
-        private readonly ITeacherRepository _teacherRepository;
+        private readonly IEntityRepository<Domain.Teacher> _teacherRepository;
 
-        public UseCaseCreateTeacher(ITeacherRepository teacherRepository)
+        public UseCaseCreateTeacher(IEntityRepository<Domain.Teacher> teacherRepository)
         {
             _teacherRepository = teacherRepository;
         }

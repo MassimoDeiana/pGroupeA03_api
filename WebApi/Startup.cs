@@ -1,13 +1,11 @@
-using System;
 using System.Collections.Generic;
-using System.IO;
-using System.Reflection;
 using Application.Helpers;
 using Application.Services;
 using Application.UseCases.Meeting;
 using Application.UseCases.SchoolClass;
 using Application.UseCases.Student;
 using Application.UseCases.Teacher;
+using Domain;
 using Infrastructure.SqlServer.Repositories.Meeting;
 using Infrastructure.SqlServer.Repositories.SchoolClass;
 using Infrastructure.SqlServer.Repositories.Student;
@@ -20,7 +18,6 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.OpenApi.Models;
-using SchoolClassRepository = Infrastructure.SqlServer.Repositories.SchoolClass.SchoolClassRepository;
 
 namespace pGroupeA03_api
 {
@@ -48,11 +45,14 @@ namespace pGroupeA03_api
             });
             // Add repos
             services.AddSingleton<SchoolClassFactory>();
-            services.AddSingleton<IEntityRepository<Domain.SchoolClass>, SchoolClassRepository>();
-            services.AddSingleton<IStudentRepository, StudentRepository>();
-            services.AddSingleton<ITeacherRepository, TeacherRepository>();
+            services.AddSingleton<IEntityRepository<SchoolClass>, SchoolClassRepository>();
+            services.AddSingleton<StudentFactory>();
+            services.AddSingleton<IEntityRepository<Student>, StudentRepository>();
+            services.AddSingleton<TeacherFactory>();
+            services.AddSingleton<IEntityRepository<Teacher>, TeacherRepository>();
+            services.AddSingleton<MeetingFactory>();
+            services.AddSingleton<IEntityRepository<Meeting>, MeetingRepository>();
             services.AddSingleton<IDatabaseManager, DatabaseManager>();
-            services.AddSingleton<IMeetingRepository, MeetingRepository>();
 
             //USECASE
                 //TEACHER

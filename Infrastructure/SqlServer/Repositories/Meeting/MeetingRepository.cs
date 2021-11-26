@@ -1,54 +1,15 @@
-﻿using System.Collections.Generic;
-using System.Data;
-using System.Data.SqlClient;
-using Infrastructure.SqlServer.Repositories.Teacher;
+﻿using System.Data.SqlClient;
 using Infrastructure.SqlServer.Utils;
 
 namespace Infrastructure.SqlServer.Repositories.Meeting
 {
-    public partial class MeetingRepository : IMeetingRepository
+    public partial class MeetingRepository : EntityRepository<Domain.Meeting>
     {
-        private readonly IDomainFactory<Domain.Meeting> _meetingFactory = new MeetingFactory();
-
-        public List<Domain.Meeting> GetAll()
+        public MeetingRepository(MeetingFactory factory) : base(factory)
         {
-            var meetings = new List<Domain.Meeting>();
-
-            using var connection = Database.GetConnection();
-            connection.Open();
-            var command = new SqlCommand
-            {
-                Connection = connection,
-                CommandText = ReqGetAll
-            };
-
-            var reader = command.ExecuteReader(CommandBehavior.CloseConnection);
-
-            while (reader.Read())
-            {
-                meetings.Add(_meetingFactory.CreateFromSqlReader(reader));
-            }
-
-            return meetings;
         }
 
-        public Domain.Meeting GetById(int id)
-        {
-            using var connection = Database.GetConnection();
-            connection.Open();
-            var command = new SqlCommand
-            {
-                Connection = connection,
-                CommandText = ReqGetById
-            };
-            command.Parameters.AddWithValue("@" + ColId, id);
-
-            var reader = command.ExecuteReader(CommandBehavior.CloseConnection);
-            
-            return reader.Read() ? _meetingFactory.CreateFromSqlReader(reader) : null;
-        }
-        
-        public Domain.Meeting Create(Domain.Meeting meeting)
+        public override Domain.Meeting Create(Domain.Meeting t)
         {
             using var connection = Database.GetConnection();
             connection.Open();
@@ -59,27 +20,12 @@ namespace Infrastructure.SqlServer.Repositories.Meeting
                 CommandText = ReqCreate
             };
             
-            command.Parameters.AddWithValue("@" + ColSubject, meeting.Subject);
+            command.Parameters.AddWithValue("@" + ColSubject, t.Subject);
             
 
-            meeting.IdMeeting = (int) command.ExecuteScalar();
+            t.IdMeeting = (int) command.ExecuteScalar();
 
-            return meeting;
-        }
-
-        
-        public bool Delete(int id)
-        {
-            using var connection = Database.GetConnection();
-            connection.Open();
-            var command = new SqlCommand
-            {
-                Connection = connection,
-                CommandText = ReqDelete
-            };
-
-            command.Parameters.AddWithValue("@" + ColId, id);
-            return command.ExecuteNonQuery() > 0;
+            return t;
         }
     }
 }

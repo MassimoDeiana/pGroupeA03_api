@@ -1,17 +1,16 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
 using Application.UseCases.Meeting.Dtos;
-using Application.UseCases.Teacher.Dtos;
 using Application.UseCases.Utils;
-using Infrastructure.SqlServer.Repositories.Meeting;
+using Infrastructure.SqlServer.Utils;
 
 namespace Application.UseCases.Meeting
 {
     public class UseCaseGetMeeting : IQuery<List<OutputDtoMeeting>>
     {
-        private readonly IMeetingRepository _meetingRepository;
+        private readonly IEntityRepository<Domain.Meeting>  _meetingRepository;
         
-        public UseCaseGetMeeting(IMeetingRepository meetingRepository)
+        public UseCaseGetMeeting(IEntityRepository<Domain.Meeting> meetingRepository)
         {
             _meetingRepository = meetingRepository;
         }

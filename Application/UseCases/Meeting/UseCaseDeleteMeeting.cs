@@ -1,19 +1,19 @@
 ﻿using Application.UseCases.Meeting.Dtos;
 using Application.UseCases.Utils;
-using Infrastructure.SqlServer.Repositories.Meeting;
+using Infrastructure.SqlServer.Utils;
 
 namespace Application.UseCases.Meeting
 {
     public class UseCaseDeleteMeeting : IDeleting<InputDtoGenerateMeeting>
     {
-        private readonly IMeetingRepository _meetingRepository;
+        private readonly IEntityRepository<Domain.Meeting>  _meetingRepository;
 
-        public UseCaseDeleteMeeting(IMeetingRepository meetingRepository)
+        public UseCaseDeleteMeeting(IEntityRepository<Domain.Meeting> meetingRepository)
         {
             _meetingRepository = meetingRepository;
         }
 
-        public bool Execute(string request, InputDtoGenerateMeeting dto, string col)
+        public bool Execute(InputDtoGenerateMeeting dto)
         {
             return _meetingRepository.Delete(dto.IdMeeting);
         }

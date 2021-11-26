@@ -42,12 +42,10 @@ namespace pGroupeA03_api.Controllers
             try
             {
                 return _useCaseGenerateSchoolClass.Execute(
-                    SchoolClassRepository.ReqGetById,
                     new InputDtoGenerateSchoolClass
                     {
                         IdSchoolClass = id
-                    },
-                    SchoolClassRepository.ColId);
+                    });
             }
             catch (IndexOutOfRangeException e)
             {
@@ -69,12 +67,10 @@ namespace pGroupeA03_api.Controllers
         public ActionResult Delete(int id)
         {
             if (_useCaseDeleteSchoolClass.Execute(
-                SchoolClassRepository.ReqDelete,
                 new InputDtoGenerateSchoolClass
                 {
                     IdSchoolClass = id
-                },
-                SchoolClassRepository.ColId))
+                }))
             {
                 return Ok();
             }

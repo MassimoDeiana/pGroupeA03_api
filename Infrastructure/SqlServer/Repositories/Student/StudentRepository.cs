@@ -6,72 +6,8 @@ using Infrastructure.SqlServer.Utils;
 
 namespace Infrastructure.SqlServer.Repositories.Student
 {
-    public partial class StudentRepository : IStudentRepository
+    public partial class StudentRepository : EntityRepository<Domain.Student>
     {
-       
-
-        private readonly IDomainFactory<Domain.Student> _studentFactory = new StudentFactory();
-
-        public List<Domain.Student> GetAll()
-        {
-            var eleves = new List<Domain.Student>();
-
-            using var connection = Database.GetConnection();
-            connection.Open();
-            var command = new SqlCommand
-            {
-                Connection = connection,
-                CommandText = StudentRepository.ReqGetAll
-            };
-
-            var reader = command.ExecuteReader(CommandBehavior.CloseConnection);
-
-            while (reader.Read())
-            {
-                eleves.Add(_studentFactory.CreateFromSqlReader(reader));
-            }
-
-            return eleves;
-        }
-
-        public Domain.Student GetById(int id)
-        {
-            using var connection = Database.GetConnection();
-            connection.Open();
-            var command = new SqlCommand
-            {
-                Connection = connection,
-                CommandText = StudentRepository.ReqGetById
-            };
-            command.Parameters.AddWithValue("@" + StudentRepository.ColId, id);
-
-            var reader = command.ExecuteReader(CommandBehavior.CloseConnection);
-            
-            return reader.Read() ? _studentFactory.CreateFromSqlReader(reader) : null;
-        }
-
-        
-        public Domain.Student Create(Domain.Student student)
-        {
-            using var connection = Database.GetConnection();
-            connection.Open();
-            var command = new SqlCommand
-            {
-                Connection = connection,
-                CommandText = StudentRepository.ReqCreate
-            };
-            command.Parameters.AddWithValue("@" + StudentRepository.ColName, student.Name);
-            command.Parameters.AddWithValue("@" + StudentRepository.ColFirstname, student.FirstName);
-            command.Parameters.AddWithValue("@" + StudentRepository.ColBirthdate, student.BirthDate);
-            command.Parameters.AddWithValue("@" + StudentRepository.ColMail, student.Mail);
-            command.Parameters.AddWithValue("@" + StudentRepository.ColIdClass, student.IdClass);
-
-            student.IdStudent = (int) command.ExecuteScalar();
-            
-            return student;
-        }
-
-
 
         /*
         public bool Update(int id, Domain.Student student)
@@ -94,19 +30,28 @@ namespace Infrastructure.SqlServer.Repositories.Student
             return command.ExecuteNonQuery() > 0;
         }
 */
-        public bool Delete(int id)
+        public StudentRepository(StudentFactory factory) : base(factory)
+        {
+        }
+
+        public override Domain.Student Create(Domain.Student t)
         {
             using var connection = Database.GetConnection();
             connection.Open();
             var command = new SqlCommand
             {
                 Connection = connection,
-                CommandText = StudentRepository.ReqDelete
+                CommandText = StudentRepository.ReqCreate
             };
+            command.Parameters.AddWithValue("@" + StudentRepository.ColName, t.Name);
+            command.Parameters.AddWithValue("@" + StudentRepository.ColFirstname, t.FirstName);
+            command.Parameters.AddWithValue("@" + StudentRepository.ColBirthdate, t.BirthDate);
+            command.Parameters.AddWithValue("@" + StudentRepository.ColMail, t.Mail);
+            command.Parameters.AddWithValue("@" + StudentRepository.ColIdClass, t.IdClass);
 
-            command.Parameters.AddWithValue("@" + StudentRepository.ColId, id);
-            return command.ExecuteNonQuery() > 0;
+            t.IdStudent = (int) command.ExecuteScalar();
+            
+            return t;
         }
-
     }
 }

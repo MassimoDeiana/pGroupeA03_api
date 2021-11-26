@@ -61,12 +61,11 @@ namespace pGroupeA03_api.Controllers
         {
             try
             {
-                return StatusCode(201, _useCaseGenerateTeacher.Execute(TeacherRepository.ReqDelete,
+                return StatusCode(201, _useCaseGenerateTeacher.Execute(
                     new InputDtoGenerateTeacher
                     {
                         IdTeacher = id
-                    },
-                    TeacherRepository.ColId));
+                    }));
             }
             catch (IndexOutOfRangeException e)
             {
@@ -88,11 +87,9 @@ namespace pGroupeA03_api.Controllers
         public ActionResult Delete(int id)
         {
             if (_useCaseDeleteTeacher.Execute(
-                TeacherRepository.ReqDelete,
                 new InputDtoGenerateTeacher {
                     IdTeacher = id
-                },
-                TeacherRepository.ColId))
+                }))
             {
                 return Ok();
             }

@@ -1,14 +1,12 @@
 ﻿using System.Collections.Generic;
 using Application.UseCases.SchoolClass.Dtos;
 using Application.UseCases.Utils;
-using Infrastructure.SqlServer.Repositories.SchoolClass;
 using Infrastructure.SqlServer.Utils;
 
 namespace Application.UseCases.SchoolClass
 {
     public class UseCaseGetSchoolClass : IQuery<List<OutputDtoSchoolClass>>
     {
-        // private readonly ISchoolClassRepository _schoolClassRepository;
         private readonly IEntityRepository<Domain.SchoolClass> _schoolClassRepository;
 
         public UseCaseGetSchoolClass(IEntityRepository<Domain.SchoolClass> schoolClassRepository)
