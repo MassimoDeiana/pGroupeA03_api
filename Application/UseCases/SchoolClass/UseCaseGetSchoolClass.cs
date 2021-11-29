@@ -5,27 +5,10 @@ using Infrastructure.SqlServer.Utils;
 
 namespace Application.UseCases.SchoolClass
 {
-    public class UseCaseGetSchoolClass : IQuery<List<OutputDtoSchoolClass>>
+    public class UseCaseGetSchoolClass : UseCaseGetEntity<OutputDtoSchoolClass, Domain.SchoolClass>
     {
-        private readonly IEntityRepository<Domain.SchoolClass> _schoolClassRepository;
-
-        public UseCaseGetSchoolClass(IEntityRepository<Domain.SchoolClass> schoolClassRepository)
+        public UseCaseGetSchoolClass(IEntityRepository<Domain.SchoolClass> repository) : base(repository)
         {
-            _schoolClassRepository = schoolClassRepository;
-        }
-
-        public List<OutputDtoSchoolClass> Execute()
-        {
-            var schoolClasses = _schoolClassRepository.GetAll();
-
-            var output = new List<OutputDtoSchoolClass>();
-
-            foreach (var schoolClass in schoolClasses)
-            {
-                output.Add(Mapper.GetInstance().Map<OutputDtoSchoolClass>(schoolClass));
-            }
-
-            return output;
         }
     }
 }

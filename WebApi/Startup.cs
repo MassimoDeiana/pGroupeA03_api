@@ -2,11 +2,13 @@ using System.Collections.Generic;
 using Application.Helpers;
 using Application.Services;
 using Application.UseCases.Meeting;
+using Application.UseCases.Note;
 using Application.UseCases.SchoolClass;
 using Application.UseCases.Student;
 using Application.UseCases.Teacher;
 using Domain;
 using Infrastructure.SqlServer.Repositories.Meeting;
+using Infrastructure.SqlServer.Repositories.Note;
 using Infrastructure.SqlServer.Repositories.SchoolClass;
 using Infrastructure.SqlServer.Repositories.Student;
 using Infrastructure.SqlServer.Repositories.Teacher;
@@ -46,12 +48,19 @@ namespace pGroupeA03_api
             // Add repos
             services.AddSingleton<SchoolClassFactory>();
             services.AddSingleton<IEntityRepository<SchoolClass>, SchoolClassRepository>();
+            
             services.AddSingleton<StudentFactory>();
             services.AddSingleton<IEntityRepository<Student>, StudentRepository>();
+            
             services.AddSingleton<TeacherFactory>();
             services.AddSingleton<IEntityRepository<Teacher>, TeacherRepository>();
+            
             services.AddSingleton<MeetingFactory>();
             services.AddSingleton<IEntityRepository<Meeting>, MeetingRepository>();
+
+            services.AddSingleton<NoteFactory>();
+            services.AddSingleton<IEntityRepository<Note>, NoteRepository>();
+            
             services.AddSingleton<IDatabaseManager, DatabaseManager>();
 
             //USECASE
@@ -77,11 +86,16 @@ namespace pGroupeA03_api
                 services.AddSingleton<UseCaseDeleteSchoolClass>();
                 
                 //MEETING
-                
                 services.AddSingleton<UseCaseCreateMeeting>();
                 services.AddSingleton<UseCaseGetMeeting>();
                 services.AddSingleton<UseCaseGenerateMeeting>();
                 services.AddSingleton<UseCaseDeleteMeeting>();
+                
+                //NOTE
+                services.AddSingleton<UseCaseCreateNote>();
+                services.AddSingleton<UseCaseGetNote>();
+                services.AddSingleton<UseCaseGenerateNote>();
+                services.AddSingleton<UseCaseDeleteNote>();
 
                 services.AddControllers();
             

@@ -4,22 +4,10 @@ using Infrastructure.SqlServer.Utils;
 
 namespace Application.UseCases.Student
 {
-    public class UseCaseCreateStudent : IWriting<OutputDtoStudent,InputDtoStudent>
+    public class UseCaseCreateStudent : UseCaseCreateEntity<OutputDtoStudent, InputDtoStudent, Domain.Student>
     {
-        private readonly IEntityRepository<Domain.Student> _studentRepository;
-
-        public UseCaseCreateStudent(IEntityRepository<Domain.Student> studentRepository)
+        public UseCaseCreateStudent(IEntityRepository<Domain.Student> repository) : base(repository)
         {
-            _studentRepository = studentRepository;
-        }
-        
-        public OutputDtoStudent Execute(InputDtoStudent dto)
-        {
-            var studentFromDto = Mapper.GetInstance().Map<Domain.Student>(dto);
-
-            var studentFromDb = _studentRepository.Create(studentFromDto);
-
-            return Mapper.GetInstance().Map<OutputDtoStudent>(studentFromDb);
         }
     }
 }

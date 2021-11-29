@@ -6,20 +6,10 @@ using Infrastructure.SqlServer.Utils;
 
 namespace Application.UseCases.Meeting
 {
-    public class UseCaseGetMeeting : IQuery<List<OutputDtoMeeting>>
+    public class UseCaseGetMeeting : UseCaseGetEntity<OutputDtoMeeting, Domain.Meeting>
     {
-        private readonly IEntityRepository<Domain.Meeting>  _meetingRepository;
-        
-        public UseCaseGetMeeting(IEntityRepository<Domain.Meeting> meetingRepository)
+        public UseCaseGetMeeting(IEntityRepository<Domain.Meeting> repository) : base(repository)
         {
-            _meetingRepository = meetingRepository;
-        }
-
-        public List<OutputDtoMeeting> Execute()
-        {
-            var meetings = _meetingRepository.GetAll();
-
-            return meetings.Select(t => Mapper.GetInstance().Map<OutputDtoMeeting>(t)).ToList();
         }
     }
 }

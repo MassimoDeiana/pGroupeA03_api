@@ -16,13 +16,13 @@ namespace Infrastructure.SqlServer.Repositories.Student
             var command = new SqlCommand
             {
                 Connection = connection,
-                CommandText = StudentRepository.ReqCreate
+                CommandText = ReqCreate
             };
-            command.Parameters.AddWithValue("@" + StudentRepository.ColName, t.Name);
-            command.Parameters.AddWithValue("@" + StudentRepository.ColFirstname, t.FirstName);
-            command.Parameters.AddWithValue("@" + StudentRepository.ColBirthdate, t.BirthDate);
-            command.Parameters.AddWithValue("@" + StudentRepository.ColMail, t.Mail);
-            command.Parameters.AddWithValue("@" + StudentRepository.ColIdClass, t.IdClass);
+            command.Parameters.AddWithValue("@" + ColName, t.Name);
+            command.Parameters.AddWithValue("@" + ColFirstname, t.FirstName);
+            command.Parameters.AddWithValue("@" + ColBirthdate, t.BirthDate);
+            command.Parameters.AddWithValue("@" + ColMail, t.Mail);
+            command.Parameters.AddWithValue("@" + ColIdClass, t.IdClass);
 
             t.IdStudent = (int) command.ExecuteScalar();
             
@@ -39,12 +39,12 @@ namespace Infrastructure.SqlServer.Repositories.Student
                 Connection = connection,
                 CommandText = ReqUpdate
             };
-            command.Parameters.AddWithValue("@" + StudentRepository.ColId, id);
-            command.Parameters.AddWithValue("@" + StudentRepository.ColName, t.Name);
-            command.Parameters.AddWithValue("@" + StudentRepository.ColFirstname, t.FirstName);
-            command.Parameters.AddWithValue("@" + StudentRepository.ColBirthdate, t.BirthDate);
-            command.Parameters.AddWithValue("@" + StudentRepository.ColMail, t.Mail);
-            command.Parameters.AddWithValue("@" + StudentRepository.ColIdClass, t.IdClass);
+            command.Parameters.AddWithValue("@" + ColId, id);
+            command.Parameters.AddWithValue("@" + ColName, t.Name);
+            command.Parameters.AddWithValue("@" + ColFirstname, t.FirstName);
+            command.Parameters.AddWithValue("@" + ColBirthdate, t.BirthDate);
+            command.Parameters.AddWithValue("@" + ColMail, t.Mail);
+            command.Parameters.AddWithValue("@" + ColIdClass, t.IdClass);
 
             return command.ExecuteNonQuery() > 0;
         }

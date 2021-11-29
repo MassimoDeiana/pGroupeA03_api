@@ -11,8 +11,6 @@ namespace Infrastructure.SqlServer
 
         private static string _connectionString; // = "Server=DESKTOP-AQEOHNM;Database=dbgroupeA03;Integrated Security=SSPI";
         
-        
-        
         public static SqlConnection GetConnection()
         {
             using (var streamReader = File.OpenText(FileName))

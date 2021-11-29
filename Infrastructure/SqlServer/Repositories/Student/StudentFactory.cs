@@ -15,7 +15,7 @@ namespace Infrastructure.SqlServer.Repositories.Student
                 FirstName = reader.GetString(reader.GetOrdinal(StudentRepository.ColFirstname)),
                 BirthDate = reader.GetDateTime(reader.GetOrdinal(StudentRepository.ColBirthdate)),
                 Mail = reader.GetString(reader.GetOrdinal(StudentRepository.ColMail)),
-                IdClass = reader.GetInt32(reader.GetOrdinal(StudentRepository.ColIdClass)),
+                IdClass = reader.GetInt32(reader.GetOrdinal(StudentRepository.ColIdClass))
             };
         }
     }

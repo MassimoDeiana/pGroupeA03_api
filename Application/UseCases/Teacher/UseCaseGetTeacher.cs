@@ -6,20 +6,10 @@ using Infrastructure.SqlServer.Utils;
 
 namespace Application.UseCases.Teacher
 {
-    public class UseCaseGetTeacher : IQuery<List<OutputDtoTeacher>>
+    public class UseCaseGetTeacher : UseCaseGetEntity<OutputDtoTeacher, Domain.Teacher>
     {
-        private readonly IEntityRepository<Domain.Teacher> _teacherRepository;
-        
-        public UseCaseGetTeacher(IEntityRepository<Domain.Teacher> teacherRepository)
+        public UseCaseGetTeacher(IEntityRepository<Domain.Teacher> repository) : base(repository)
         {
-            _teacherRepository = teacherRepository;
-        }
-
-        public List<OutputDtoTeacher> Execute()
-        {
-            var teachers = _teacherRepository.GetAll();
-
-            return teachers.Select(t => Mapper.GetInstance().Map<OutputDtoTeacher>(t)).ToList();
         }
     }
 }

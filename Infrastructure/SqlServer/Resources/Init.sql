@@ -50,8 +50,8 @@ idclass int not null
 alter table student
 add constraint fkstudentclass foreign key(idclass) references schoolclass(idclass);
 
-
 create table course(
+idcourse int identity,
 day date not null,
 hour time not null,
 duration tinyint not null,
@@ -61,10 +61,8 @@ idclass int not null,
 primary key(subject,day,hour)
 );
 
-
 alter table course
 add constraint fkcourseclass foreign key(idclass) references schoolclass(idclass);
-
 
 create table meeting(
 idmeeting int identity,
@@ -80,6 +78,7 @@ primary key(idmeeting,idteacher,datemeeting)
 );
 
 create table note(
+idnote int identity,
 idteacher int not null,
 idstudent int not null foreign key(idstudent) references student(idstudent),
 datenote datetime not null,
