@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Data.SqlClient;
 using System.Net;
 using Application.UseCases.SchoolClass;
 using Application.UseCases.SchoolClass.Dtos;
@@ -65,15 +66,26 @@ namespace pGroupeA03_api.Controllers
         [Route("{id:int}")]
         public ActionResult Delete(int id)
         {
-            if (_useCaseDeleteSchoolClass.Execute(
-                new InputDtoGenerateSchoolClass
-                {
-                    IdSchoolClass = id
-                }))
+            try
             {
+                _useCaseDeleteSchoolClass.Execute(
+                    new InputDtoGenerateSchoolClass
+                    {
+                        IdSchoolClass = id
+                    });
                 return Ok();
             }
-
+            catch (SqlException e)
+            { 
+                if(e.Errors.Count > 0)
+                {
+                    throw e.Errors[0].Number switch
+                    {
+                        547 => new InvalidOperationException("At least one student remains in the class."),
+                        _ => new Exception()
+                    };
+                }
+            }
             return NotFound();
         }
     }

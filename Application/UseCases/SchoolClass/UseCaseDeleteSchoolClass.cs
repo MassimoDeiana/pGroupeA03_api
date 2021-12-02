@@ -13,7 +13,7 @@ namespace Application.UseCases.SchoolClass
             _schoolClassRepository = schoolClassRepository;
         }
 
-        public bool Execute( InputDtoGenerateSchoolClass dto)
+        public bool Execute(InputDtoGenerateSchoolClass dto)
         {
             return _schoolClassRepository.Delete(dto.IdSchoolClass);
         }

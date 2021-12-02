@@ -12,7 +12,7 @@
             ColPassword = "password";
 
         private static readonly string ReqCreate = $@"INSERT INTO {TableName}({ColName}, {ColFirstName}, {ColBirthDate}, {ColMail}, {ColPassword}) OUTPUT INSERTED.{ColId} 
-            VALUES(@{ColName}, @{ColFirstName}, @{ColBirthDate}, @{ColMail}, @{ColPassword})";
+                    VALUES(@{ColName}, @{ColFirstName}, @{ColBirthDate}, @{ColMail}, @{ColPassword})";
 
     }
 }

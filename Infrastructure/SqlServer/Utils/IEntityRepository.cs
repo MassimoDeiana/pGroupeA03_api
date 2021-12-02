@@ -9,8 +9,6 @@ namespace Infrastructure.SqlServer.Utils
         T GetById(int id);
 
         T Create(T t);
-
-        bool Update(int id, T t);
         
         bool Delete(int id);
     }

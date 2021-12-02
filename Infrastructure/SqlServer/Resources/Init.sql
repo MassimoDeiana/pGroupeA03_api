@@ -44,11 +44,9 @@ name varchar(50) not null,
 firstname varchar(50) not null,
 birthdate date not null,
 mail nvarchar(50) not null,
-idclass int not null
+password nvarchar(50) not null,
+idclass int not null foreign key(idclass) references schoolclass(idclass)
 );
-
-alter table student
-add constraint fkstudentclass foreign key(idclass) references schoolclass(idclass);
 
 create table course(
 idcourse int identity,
@@ -57,21 +55,17 @@ hour time not null,
 duration tinyint not null,
 subject varchar(50) not null,
 idteacher int not null foreign key(idteacher) references teacher(idteacher),
-idclass int not null,
+idclass int not null foreign key(idclass) references schoolclass(idclass),
 primary key(subject,day,hour)
 );
 
-alter table course
-add constraint fkcourseclass foreign key(idclass) references schoolclass(idclass);
-
 create table meeting(
-idmeeting int identity,
-subject varchar(50) not null,
-primary key(idmeeting)
+idmeeting int identity primary key,
+subject varchar(50) not null
 );
 
 create table participatemeeting(
-idmeeting int not null,
+idmeeting int not null foreign key(idmeeting) references meeting(idmeeting),
 idteacher int not null foreign key(idteacher) references teacher(idteacher),
 datemeeting date not null,
 primary key(idmeeting,idteacher,datemeeting)
@@ -79,9 +73,10 @@ primary key(idmeeting,idteacher,datemeeting)
 
 create table note(
 idnote int identity,
-idteacher int not null,
+idteacher int not null foreign key(idteacher) references teacher(idteacher),
 idstudent int not null foreign key(idstudent) references student(idstudent),
 datenote datetime not null,
+result float not null,
 message varchar(80),
-primary key(idteacher,idstudent,datenote),
+primary key(idteacher,idstudent,datenote)
 );

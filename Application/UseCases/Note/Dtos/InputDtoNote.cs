@@ -10,6 +10,8 @@ namespace Application.UseCases.Note.Dtos
         
         public DateTime DateNote { get; set; }
         
+        public double Result { get; set; }
+        
         public string Message { get; set; }
     }
 }

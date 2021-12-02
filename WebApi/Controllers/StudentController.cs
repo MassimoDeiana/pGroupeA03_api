@@ -27,7 +27,6 @@ namespace pGroupeA03_api.Controllers
             _useCaseGetStudent = useCaseGetStudent;
             _useCaseGenerateStudent = useCaseGenerateStudent;
             _useCaseUpdateStudent = useCaseUpdateStudent;
-
             _useCaseDeleteStudent = useCaseDeleteStudent;
         }
 
@@ -66,10 +65,10 @@ namespace pGroupeA03_api.Controllers
         
         
         [HttpPut]
-        [Route("{id:int}")] //on aura un id pour la route
-        public ActionResult Update(int id, InputDtoStudent student)
+        [Route("{id:int}/{idClass:int}")] //on aura un id pour la route
+        public ActionResult Update(int id, int idClass)
         {
-            if (_useCaseUpdateStudent.Execute(id, student))
+            if (_useCaseUpdateStudent.Execute(id, idClass))
             {
                 return Ok();
             }

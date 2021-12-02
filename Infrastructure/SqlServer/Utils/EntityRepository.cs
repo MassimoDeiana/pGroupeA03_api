@@ -79,51 +79,6 @@ namespace Infrastructure.SqlServer.Utils
         }
 
         public abstract T Create(T t);
-        /*{
-            using var connection = Database.GetConnection();
-            connection.Open();
-            
-            var strCol = string.Join(",", _tableColumns);
-            var strParam = string.Join(",", _tableColumns.Select(r => "@" + r));
-            
-            var sql = $"INSERT INTO {_tableName} ({strCol}) VALUES ({strParam})";
-
-            var command = new SqlCommand
-            {
-                Connection = connection,
-                CommandText = sql
-            };
-            
-            foreach (var column in _tableColumns.Skip(1))
-            {
-               // command.Parameters.AddWithValue("@" + column, t.column);
-            }
-            var type = t.GetType();
-            var properties = type.GetProperties();
-            Console.WriteLine(properties[1].Name);
-            var i = 1;
-            foreach (var column in _tableColumns.Skip(1))
-            {
-               // command.Parameters.AddWithValue($@"@{column}", _data[i]);
-                i++;
-            }
-            /*foreach (var property in t.GetType().GetProperties())
-                      {
-                          // Gets the first attribute of type ColumnAttribute for the property
-                          // As you defined AllowMultiple as true, you should loop through all attributes instead.
-                          var attribute = property.GetCustomAttributes(false).OfType<ColumnAttribute>().FirstOrDefault();
-                          if (attribute != null)
-                          {
-                              Console.WriteLine(attribute.Name);    // Prints AGE_FIELD
-                          }
-                      }#1#
-            //t.Id = (int) command.ExecuteScalar();
-            command.ExecuteScalar();
-
-            return t;
-        }*/
-
-        public abstract bool Update(int id, T t);
 
         public bool Delete(int id)
         {

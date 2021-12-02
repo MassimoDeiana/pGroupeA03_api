@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Text.Json.Serialization;
 
 namespace Domain
 {
@@ -14,7 +15,9 @@ namespace Domain
         
         public string Mail { get; set; }
         
-        public int IdClass { get; set; } 
-
+        [JsonIgnore]
+        public string Password { get; set; }
+        
+        public int IdClass { get; set; }
     }
 }

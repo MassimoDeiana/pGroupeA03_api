@@ -1,23 +1,19 @@
-﻿using Application.UseCases.Student.Dtos;
-using Application.UseCases.Utils;
-using Infrastructure.SqlServer.Utils;
+﻿using Infrastructure.SqlServer.Repositories.Student;
 
 namespace Application.UseCases.Student
 {
-    public class UseCaseUpdateStudent : IUpdating<InputDtoStudent>
+    public class UseCaseUpdateStudent
     {
-        private readonly IEntityRepository<Domain.Student> _studentRepository;
+        private readonly IStudentRepository _studentRepository;
 
-        public UseCaseUpdateStudent(IEntityRepository<Domain.Student> studentRepository)
+        public UseCaseUpdateStudent(IStudentRepository studentRepository)
         {
             _studentRepository = studentRepository;
         }
 
-        public bool Execute(int id, InputDtoStudent dto)
+        public bool Execute(int id, int idClass)
         {
-            var studentFromDto = Mapper.GetInstance().Map<Domain.Student>(dto);
-            
-            return _studentRepository.Update(id, studentFromDto);
+            return _studentRepository.Update(id, idClass);
         }
     }
 }

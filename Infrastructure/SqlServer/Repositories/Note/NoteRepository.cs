@@ -1,6 +1,5 @@
 ﻿using System.Data.SqlClient;
 using Infrastructure.SqlServer.Utils;
-using NotImplementedException = System.NotImplementedException;
 
 namespace Infrastructure.SqlServer.Repositories.Note
 {
@@ -19,19 +18,16 @@ namespace Infrastructure.SqlServer.Repositories.Note
                 Connection = connection,
                 CommandText = ReqCreate
             };
+            
             command.Parameters.AddWithValue("@" + ColIdTeacher, t.IdTeacher);
             command.Parameters.AddWithValue("@" + ColIdStudent, t.IdStudent);
             command.Parameters.AddWithValue("@" + ColDateNote, t.DateNote);
+            command.Parameters.AddWithValue("@" + ColResult, t.Result);
             command.Parameters.AddWithValue("@" + ColMessage, t.Message);
 
             t.IdNote = (int) command.ExecuteScalar();
             
             return t;
-        }
-
-        public override bool Update(int id, Domain.Note t)
-        {
-            throw new NotImplementedException();
         }
     }
 }

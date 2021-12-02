@@ -3,12 +3,14 @@ using Application.Helpers;
 using Application.Services;
 using Application.UseCases.Meeting;
 using Application.UseCases.Note;
+using Application.UseCases.ParticipateMeeting;
 using Application.UseCases.SchoolClass;
 using Application.UseCases.Student;
 using Application.UseCases.Teacher;
 using Domain;
 using Infrastructure.SqlServer.Repositories.Meeting;
 using Infrastructure.SqlServer.Repositories.Note;
+using Infrastructure.SqlServer.Repositories.ParticipateMeeting;
 using Infrastructure.SqlServer.Repositories.SchoolClass;
 using Infrastructure.SqlServer.Repositories.Student;
 using Infrastructure.SqlServer.Repositories.Teacher;
@@ -51,7 +53,8 @@ namespace pGroupeA03_api
             
             services.AddSingleton<StudentFactory>();
             services.AddSingleton<IEntityRepository<Student>, StudentRepository>();
-            
+            services.AddSingleton<IStudentRepository, StudentRepository>();
+
             services.AddSingleton<TeacherFactory>();
             services.AddSingleton<IEntityRepository<Teacher>, TeacherRepository>();
             
@@ -60,7 +63,11 @@ namespace pGroupeA03_api
 
             services.AddSingleton<NoteFactory>();
             services.AddSingleton<IEntityRepository<Note>, NoteRepository>();
-            
+
+            services.AddSingleton<ParticipateMeetingFactory>();
+            services.AddSingleton<IEntityRepository<ParticipateMeeting>, ParticipateMeetingRepository>();
+            services.AddSingleton<IParticipateMeetingRepository, ParticipateMeetingRepository>();
+
             services.AddSingleton<IDatabaseManager, DatabaseManager>();
 
             //USECASE
@@ -96,6 +103,12 @@ namespace pGroupeA03_api
                 services.AddSingleton<UseCaseGetNote>();
                 services.AddSingleton<UseCaseGenerateNote>();
                 services.AddSingleton<UseCaseDeleteNote>();
+                
+                //PARTICIPATEMEETING
+                services.AddSingleton<UseCaseCreateParticipateMeeting>();
+                services.AddSingleton<UseCaseGetParticipateMeeting>();
+                services.AddSingleton<UseCaseGenerateParticipateMeeting>();
+                services.AddSingleton<UseCaseDeleteParticipateMeeting>();
 
                 services.AddControllers();
             

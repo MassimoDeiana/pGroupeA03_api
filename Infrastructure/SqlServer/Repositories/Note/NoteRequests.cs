@@ -8,11 +8,12 @@
             ColIdTeacher = "idteacher",
             ColIdStudent = "idstudent",
             ColDateNote = "datenote",
+            ColResult = "result",
             ColMessage = "message";
 
         private static readonly string ReqCreate = $@"
-            INSERT INTO {TableName}({ColIdTeacher}, {ColIdStudent}, {ColDateNote}, {ColMessage})
+            INSERT INTO {TableName}({ColIdTeacher}, {ColIdStudent}, {ColDateNote}, {ColResult}, {ColMessage})
             OUTPUT INSERTED.{ColId}
-            VALUES(@{ColIdTeacher}, @{ColIdStudent}, @{ColDateNote}, @{ColMessage})";
+            VALUES(@{ColIdTeacher}, @{ColIdStudent}, @{ColDateNote}, @{ColResult}, @{ColMessage})";
     }
 }

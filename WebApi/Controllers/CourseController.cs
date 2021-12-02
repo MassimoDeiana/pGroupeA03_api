@@ -16,17 +16,14 @@ namespace pGroupeA03_api.Controllers
         
         private readonly UseCaseCreateCourse _useCaseCreateCourse;
         private readonly UseCaseGetCourse _useCaseGetCourse;
-        private readonly ICourseRepository _courseRepository;
         private readonly UseCaseGenerateCourse _useCaseGenerateCourse;
         private readonly UseCaseDeleteCourse _useCaseDeleteCourse;
 
-        public CourseController(ICourseRepository courseRepository,
-            UseCaseCreateCourse useCaseCreateCourse,
+        public CourseController(UseCaseCreateCourse useCaseCreateCourse,
             UseCaseGetCourse useCaseGetCourse,
             UseCaseGenerateCourse useCaseGenerateCourse,
             UseCaseDeleteCourse useCaseDeleteCourse) 
         {
-            _courseRepository = courseRepository;
             _useCaseCreateCourse = useCaseCreateCourse;
             _useCaseGetCourse = useCaseGetCourse;
             _useCaseGenerateCourse = useCaseGenerateCourse;
