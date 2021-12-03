@@ -61,7 +61,9 @@ primary key(subject,day,hour)
 
 create table meeting(
 idmeeting int identity primary key,
-subject varchar(50) not null
+subject varchar(50) not null,
+starttime datetime not null,
+endtime datetime not null
 );
 
 create table participatemeeting(

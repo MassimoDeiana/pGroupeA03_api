@@ -21,6 +21,8 @@ namespace Infrastructure.SqlServer.Repositories.Meeting
             };
             
             command.Parameters.AddWithValue("@" + ColSubject, t.Subject);
+            command.Parameters.AddWithValue("@" + ColStart, t.StartTime);
+            command.Parameters.AddWithValue("@" + ColEnd, t.EndTime);
             
             t.IdMeeting = (int) command.ExecuteScalar();
 

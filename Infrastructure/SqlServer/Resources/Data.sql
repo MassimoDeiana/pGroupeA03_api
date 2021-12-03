@@ -8,4 +8,5 @@ insert into student(name,firstname,birthdate,mail,password,idclass) values ('Vin
                                                                   ('Debuyschere','Adrien','2002-02-04','AdrienD@gmail.com','password2',1),
                                                                 ('Lixon','Allan','2001-07-11','AllanLixon@gmail.com','password2',3);
 
-
+insert into meeting(subject,starttime,endtime) values ('Réunion pour péter les élèves','2021-10-03T14:00:00','2021-10-03T16:00:00'),
+                                                ('Formation numérique', '2021-10-04T16:00:00','2021-10-04T18:00:00');
