@@ -9,7 +9,7 @@ namespace Infrastructure.SqlServer
     {
         private const string FileName = @"..\connection.txt";
 
-        private static string _connectionString; // = "Server=DESKTOP-AQEOHNM;Database=dbgroupeA03;Integrated Security=SSPI";
+        private static string _connectionString; // = "Server=PORTABLE_ALLAN;Database=dbgroupeA03;Integrated Security=SSPI";
         
         public static SqlConnection GetConnection()
         {

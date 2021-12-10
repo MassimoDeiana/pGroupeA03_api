@@ -11,6 +11,9 @@
             ColResult = "result",
             ColMessage = "message";
 
+        private static readonly string ReqGetByID = $@"
+            SELECT * FROM {TableName} WHERE {ColIdStudent} = @{ColIdStudent}";
+        
         private static readonly string ReqCreate = $@"
             INSERT INTO {TableName}({ColIdTeacher}, {ColIdStudent}, {ColDateNote}, {ColResult}, {ColMessage})
             OUTPUT INSERTED.{ColId}

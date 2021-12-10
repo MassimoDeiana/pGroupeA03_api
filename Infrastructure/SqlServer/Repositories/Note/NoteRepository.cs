@@ -1,12 +1,18 @@
-﻿using System.Data.SqlClient;
+﻿using System.Collections.Generic;
+using System.Data;
+using System.Data.SqlClient;
+using Infrastructure.SqlServer.Repositories.Student;
 using Infrastructure.SqlServer.Utils;
 
 namespace Infrastructure.SqlServer.Repositories.Note
 {
-    public partial class NoteRepository : EntityRepository<Domain.Note>
+    public partial class NoteRepository : EntityRepository<Domain.Note>, INoteRepository
     {
+        private readonly NoteFactory _factory;
+
         public NoteRepository(NoteFactory factory) : base(factory)
         {
+            _factory = factory;
         }
 
         public override Domain.Note Create(Domain.Note t)
@@ -28,6 +34,29 @@ namespace Infrastructure.SqlServer.Repositories.Note
             t.IdNote = (int) command.ExecuteScalar();
             
             return t;
+        }
+        public List<Domain.Note> GetById(int id)
+        {
+            var entities = new List<Domain.Note>();
+
+            using var connection = Database.GetConnection();
+            connection.Open();
+            var command = new SqlCommand
+            {
+                Connection = connection,
+                CommandText = $@"SELECT * FROM {TableName} WHERE {ColIdStudent} = @{ColIdStudent}"
+            };
+
+            command.Parameters.AddWithValue("@" + ColIdStudent, id);
+            
+            var reader = command.ExecuteReader(CommandBehavior.CloseConnection);
+
+            while (reader.Read())
+            {
+                entities.Add(_factory.CreateFromSqlReader(reader));
+            }
+
+            return entities;
         }
     }
 }

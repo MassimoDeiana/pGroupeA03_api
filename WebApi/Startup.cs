@@ -63,6 +63,7 @@ namespace pGroupeA03_api
 
             services.AddSingleton<NoteFactory>();
             services.AddSingleton<IEntityRepository<Note>, NoteRepository>();
+            services.AddSingleton<INoteRepository, NoteRepository>();
 
             services.AddSingleton<ParticipateMeetingFactory>();
             services.AddSingleton<IEntityRepository<ParticipateMeeting>, ParticipateMeetingRepository>();

@@ -49,14 +49,13 @@ idclass int not null foreign key(idclass) references schoolclass(idclass)
 );
 
 create table course(
-idcourse int identity,
+idcourse int identity primary key,
 day date not null,
 hour time not null,
 duration tinyint not null,
 subject varchar(50) not null,
 idteacher int not null foreign key(idteacher) references teacher(idteacher),
 idclass int not null foreign key(idclass) references schoolclass(idclass),
-primary key(subject,day,hour)
 );
 
 create table meeting(
@@ -73,12 +72,19 @@ datemeeting date not null,
 primary key(idmeeting,idteacher,datemeeting)
 );
 
+create table interrogation(
+idinterro int identity primary key,
+idcourse int not null foreign key(idcourse) references course(idcourse),
+subject varchar(50) not null,
+total int not null,
+);
+
 create table note(
-idnote int identity,
+idnote int identity primary key,
 idteacher int not null foreign key(idteacher) references teacher(idteacher),
 idstudent int not null foreign key(idstudent) references student(idstudent),
+idinterro int not null foreign key(idinterro) references interrogation(idinterro),
 datenote datetime not null,
 result float not null,
 message varchar(80),
-primary key(idteacher,idstudent,datenote)
 );

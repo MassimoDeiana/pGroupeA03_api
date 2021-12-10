@@ -1,24 +1,27 @@
-﻿using Application.UseCases.Note.Dtos;
+﻿using System.Collections.Generic;
+using System.Linq;
+using Application.UseCases.Note.Dtos;
 using Application.UseCases.Utils;
+using Infrastructure.SqlServer.Repositories.Note;
 using Infrastructure.SqlServer.Utils;
 
 namespace Application.UseCases.Note
 {
-    public class UseCaseGenerateNote : IQueryFiltering<OutputDtoNote, InputDtoGenerateNote>
+    public class UseCaseGenerateNote : IQueryFiltering<List<OutputDtoNote>, InputDtoGetNote>
     {
-        private readonly IEntityRepository<Domain.Note> _noteRepository;
+        private readonly INoteRepository _noteRepository;
 
-        public UseCaseGenerateNote(IEntityRepository<Domain.Note> noteRepository)
+        public UseCaseGenerateNote(INoteRepository noteRepository)
         {
             _noteRepository = noteRepository;
         }
 
 
-        public OutputDtoNote Execute(InputDtoGenerateNote dto)
+        public List<OutputDtoNote> Execute(InputDtoGetNote dto)
         {
-            var output = _noteRepository.GetById(dto.IdNote);
+            var output = _noteRepository.GetById(dto.IdStudent);
 
-            return Mapper.GetInstance().Map<OutputDtoNote>(output);
+            return output.Select(t => Mapper.GetInstance().Map<OutputDtoNote>(t)).ToList();
         }
     }
 }

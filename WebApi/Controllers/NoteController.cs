@@ -16,7 +16,6 @@ namespace pGroupeA03_api.Controllers
         private readonly UseCaseGetNote _useCaseGetNote;
         private readonly UseCaseGenerateNote _useCaseGenerateNote;
         private readonly UseCaseDeleteNote _useCaseDeleteNote;
-
         public NoteController(UseCaseCreateNote useCaseCreateNote, 
             UseCaseGetNote useCaseGetNote, 
             UseCaseGenerateNote useCaseGenerateNote, 
@@ -40,15 +39,15 @@ namespace pGroupeA03_api.Controllers
         [HttpGet]
         [Route("{id:int}")]
         [ProducesResponseType(201)]
-        public ActionResult<OutputDtoNote> GetById(int id)
+        public ActionResult<List<OutputDtoNote>> GetById(int id)
         {
             try
             {
-                return StatusCode(201, _useCaseGenerateNote.Execute(
-                    new InputDtoGenerateNote
+                return _useCaseGenerateNote.Execute(
+                    new InputDtoGetNote
                     {
-                        IdNote = id
-                    }));
+                        IdStudent = id
+                    });
             }
             catch (IndexOutOfRangeException e)
             {
