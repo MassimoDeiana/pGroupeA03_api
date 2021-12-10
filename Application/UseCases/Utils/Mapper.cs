@@ -1,4 +1,6 @@
-﻿using Application.UseCases.Meeting.Dtos;
+﻿using Application.UseCases.Course.Dtos;
+using Application.UseCases.Interrogation.Dtos;
+using Application.UseCases.Meeting.Dtos;
 using Application.UseCases.Note.Dtos;
 using Application.UseCases.ParticipateMeeting.Dtos;
 using Application.UseCases.SchoolClass.Dtos;
@@ -28,6 +30,9 @@ namespace Application.UseCases.Utils
                 cfg.CreateMap<InputDtoTeacher, Domain.Teacher>();
                 cfg.CreateMap<Domain.Teacher, OutputDtoTeacher>();
 
+                cfg.CreateMap<InputDtoCourse, Domain.Course>();
+                cfg.CreateMap<Domain.Course, OutputDtoCourse>();
+
                 cfg.CreateMap<InputDtoStudent, Domain.Student>();
                 cfg.CreateMap<Domain.Student, OutputDtoStudent>();
                 
@@ -39,6 +44,9 @@ namespace Application.UseCases.Utils
 
                 cfg.CreateMap<InputDtoParticipateMeeting, Domain.ParticipateMeeting>();
                 cfg.CreateMap<Domain.ParticipateMeeting, OutputDtoParticipateMeeting>();
+
+                cfg.CreateMap<InputDtoInterrogation, Domain.Interrogation>();
+                cfg.CreateMap<Domain.Interrogation, OutputDtoInterrogation>();
 
             });
             return new AutoMapper.Mapper(config);

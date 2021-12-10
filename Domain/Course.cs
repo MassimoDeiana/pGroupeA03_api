@@ -5,11 +5,10 @@ namespace Domain
     public class Course
     {
         public int IdCourse { get; set; }
-        public DateTime Day { get; set; }
         
-        public TimeSpan Hour { get; set; }
+        public DateTime StartTime { get; set; }
         
-        public int Duration { get; set; }
+        public DateTime EndTime { get; set; }
         
         public string Subject { get; set; }
         

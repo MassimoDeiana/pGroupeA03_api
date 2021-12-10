@@ -6,11 +6,9 @@ namespace Application.UseCases.Course.Dtos
     {
         public int IdCourse { get; set; }
         
-        public DateTime Day { get; set; }
+        public DateTime StartTime { get; set; }
         
-        public TimeSpan Hour { get; set; }
-        
-        public int Duration { get; set; }
+        public DateTime EndTime { get; set; }
         
         public string Subject { get; set; }
         

@@ -27,6 +27,7 @@ namespace Infrastructure.SqlServer.Repositories.Note
             
             command.Parameters.AddWithValue("@" + ColIdTeacher, t.IdTeacher);
             command.Parameters.AddWithValue("@" + ColIdStudent, t.IdStudent);
+            command.Parameters.AddWithValue("@" + ColIdInterro, t.IdInterro);
             command.Parameters.AddWithValue("@" + ColDateNote, t.DateNote);
             command.Parameters.AddWithValue("@" + ColResult, t.Result);
             command.Parameters.AddWithValue("@" + ColMessage, t.Message);
@@ -35,7 +36,7 @@ namespace Infrastructure.SqlServer.Repositories.Note
             
             return t;
         }
-        public List<Domain.Note> GetById(int id)
+        public new List<Domain.Note> GetById(int id)
         {
             var entities = new List<Domain.Note>();
 

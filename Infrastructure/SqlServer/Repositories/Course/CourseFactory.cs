@@ -10,11 +10,11 @@ namespace Infrastructure.SqlServer.Repositories.Course
             return new Domain.Course
             {
                 IdCourse = reader.GetInt32(reader.GetOrdinal(CourseRepository.ColId)),
-                Day = reader.GetDateTime(reader.GetOrdinal(CourseRepository.ColDay)),
-                Hour= reader.GetTimeSpan(reader.GetOrdinal(CourseRepository.ColHour)),
-                Duration = reader.GetInt32(reader.GetOrdinal(CourseRepository.ColDuration)),
-                Subject = reader.GetString(reader.GetOrdinal(CourseRepository.ColSubject))
-
+                StartTime = reader.GetDateTime(reader.GetOrdinal(CourseRepository.ColStart)),
+                EndTime= reader.GetDateTime(reader.GetOrdinal(CourseRepository.ColEnd)),
+                Subject = reader.GetString(reader.GetOrdinal(CourseRepository.ColSubject)),
+                IdTeacher = reader.GetInt32(reader.GetOrdinal(CourseRepository.ColIdTeacher)),
+                IdClass = reader.GetInt32(reader.GetOrdinal(CourseRepository.ColIdClass))
             };    
         }
     }

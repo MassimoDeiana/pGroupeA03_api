@@ -1,6 +1,8 @@
 using System.Collections.Generic;
 using Application.Helpers;
 using Application.Services;
+using Application.UseCases.Course;
+using Application.UseCases.Interrogation;
 using Application.UseCases.Meeting;
 using Application.UseCases.Note;
 using Application.UseCases.ParticipateMeeting;
@@ -8,6 +10,8 @@ using Application.UseCases.SchoolClass;
 using Application.UseCases.Student;
 using Application.UseCases.Teacher;
 using Domain;
+using Infrastructure.SqlServer.Repositories.Course;
+using Infrastructure.SqlServer.Repositories.Interrogation;
 using Infrastructure.SqlServer.Repositories.Meeting;
 using Infrastructure.SqlServer.Repositories.Note;
 using Infrastructure.SqlServer.Repositories.ParticipateMeeting;
@@ -69,6 +73,12 @@ namespace pGroupeA03_api
             services.AddSingleton<IEntityRepository<ParticipateMeeting>, ParticipateMeetingRepository>();
             services.AddSingleton<IParticipateMeetingRepository, ParticipateMeetingRepository>();
 
+            services.AddSingleton<InterrogationFactory>();
+            services.AddSingleton<IEntityRepository<Interrogation>, InterrogationRepository>();
+            
+            services.AddSingleton<CourseFactory>();
+            services.AddSingleton<IEntityRepository<Course>, CourseRepository>();
+            
             services.AddSingleton<IDatabaseManager, DatabaseManager>();
 
             //USECASE
@@ -110,6 +120,18 @@ namespace pGroupeA03_api
                 services.AddSingleton<UseCaseGetParticipateMeeting>();
                 services.AddSingleton<UseCaseGenerateParticipateMeeting>();
                 services.AddSingleton<UseCaseDeleteParticipateMeeting>();
+                
+                //INTERROGATION
+                services.AddSingleton<UseCaseCreateInterrogation>();
+                services.AddSingleton<UseCaseGetInterrogation>();
+                services.AddSingleton<UseCaseGenerateInterrogation>();
+                services.AddSingleton<UseCaseDeleteInterrogation>();
+
+                //COURSE
+                services.AddSingleton<UseCaseCreateCourse>();
+                services.AddSingleton<UseCaseGetCourse>();
+                services.AddSingleton<UseCaseGenerateCourse>();
+                services.AddSingleton<UseCaseDeleteCourse>();
 
                 services.AddControllers();
             

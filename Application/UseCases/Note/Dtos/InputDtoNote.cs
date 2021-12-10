@@ -8,6 +8,8 @@ namespace Application.UseCases.Note.Dtos
         
         public int IdStudent { get; set; }
         
+        public int IdInterro { get; set; }
+
         public DateTime DateNote { get; set; }
         
         public double Result { get; set; }

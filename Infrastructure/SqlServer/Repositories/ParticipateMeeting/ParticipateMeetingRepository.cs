@@ -33,7 +33,7 @@ namespace Infrastructure.SqlServer.Repositories.ParticipateMeeting
             return t;
         }
 
-        public List<Domain.ParticipateMeeting> GetById(int id)
+        public new List<Domain.ParticipateMeeting> GetById(int id)
         {
             var entities = new List<Domain.ParticipateMeeting>();
 

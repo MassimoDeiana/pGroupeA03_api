@@ -2,52 +2,17 @@
 using System.Data;
 using System.Data.SqlClient;
 using Infrastructure.SqlServer.Utils;
+using NotImplementedException = System.NotImplementedException;
 
 namespace Infrastructure.SqlServer.Repositories.Course
 {
-    public partial class CourseRepository : ICourseRepository
+    public partial class CourseRepository : EntityRepository<Domain.Course>
     {
-        private readonly IDomainFactory<Domain.Course> _courseFactory = new CourseFactory();
-
-        public List<Domain.Course> GetAll()
+        public CourseRepository(CourseFactory factory) : base(factory)
         {
-            var courses = new List<Domain.Course>();
-
-            using var connection = Database.GetConnection();
-            connection.Open();
-            var command = new SqlCommand
-            {
-                Connection = connection,
-                CommandText = ReqGetAll
-            };
-
-            var reader = command.ExecuteReader(CommandBehavior.CloseConnection);
-
-            while (reader.Read())
-            {
-                courses.Add(_courseFactory.CreateFromSqlReader(reader));
-            }
-
-            return courses;
         }
 
-        public Domain.Course GetById(int id)
-        {
-            using var connection = Database.GetConnection();
-            connection.Open();
-            var command = new SqlCommand
-            {
-                Connection = connection,
-                CommandText = ReqGetById
-            };
-            command.Parameters.AddWithValue("@" + ColId, id);
-
-            var reader = command.ExecuteReader(CommandBehavior.CloseConnection);
-            
-            return reader.Read() ? _courseFactory.CreateFromSqlReader(reader) : null;
-        }
-        
-        public Domain.Course Create(Domain.Course course)
+        public override Domain.Course Create(Domain.Course t)
         {
             using var connection = Database.GetConnection();
             connection.Open();
@@ -58,30 +23,14 @@ namespace Infrastructure.SqlServer.Repositories.Course
                 CommandText = ReqCreate
             };
             
-            command.Parameters.AddWithValue("@" + ColDay, course.Day.Date);
-            command.Parameters.AddWithValue("@" + ColHour, course.Hour);
-            command.Parameters.AddWithValue("@" + ColDuration, course.Duration);
-            command.Parameters.AddWithValue("@" + ColSubject, course.Subject);
-            
+            command.Parameters.AddWithValue("@" + ColStart, t.StartTime);
+            command.Parameters.AddWithValue("@" + ColEnd, t.EndTime);
+            command.Parameters.AddWithValue("@" + ColSubject, t.Subject);
+            command.Parameters.AddWithValue("@" + ColIdTeacher, t.IdTeacher);
+            command.Parameters.AddWithValue("@" + ColIdClass, t.IdClass);
 
-            course.IdCourse = (int) command.ExecuteScalar();
+            t.IdCourse = (int) command.ExecuteScalar();
 
-            return course;
-        }
-
-        
-        public bool Delete(int id)
-        {
-            using var connection = Database.GetConnection();
-            connection.Open();
-            var command = new SqlCommand
-            {
-                Connection = connection,
-                CommandText = ReqDelete
-            };
-
-            command.Parameters.AddWithValue("@" + ColId, id);
-            return command.ExecuteNonQuery() > 0;
-        }
+            return t;        }
     }
 }

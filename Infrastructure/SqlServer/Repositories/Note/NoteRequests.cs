@@ -7,6 +7,7 @@
         public const string ColId = "idnote",
             ColIdTeacher = "idteacher",
             ColIdStudent = "idstudent",
+            ColIdInterro= "idinterro",
             ColDateNote = "datenote",
             ColResult = "result",
             ColMessage = "message";
@@ -15,8 +16,8 @@
             SELECT * FROM {TableName} WHERE {ColIdStudent} = @{ColIdStudent}";
         
         private static readonly string ReqCreate = $@"
-            INSERT INTO {TableName}({ColIdTeacher}, {ColIdStudent}, {ColDateNote}, {ColResult}, {ColMessage})
+            INSERT INTO {TableName}({ColIdTeacher}, {ColIdStudent},{ColIdInterro}, {ColDateNote}, {ColResult}, {ColMessage})
             OUTPUT INSERTED.{ColId}
-            VALUES(@{ColIdTeacher}, @{ColIdStudent}, @{ColDateNote}, @{ColResult}, @{ColMessage})";
+            VALUES(@{ColIdTeacher}, @{ColIdStudent},@{ColIdInterro}, @{ColDateNote}, @{ColResult}, @{ColMessage})";
     }
 }
