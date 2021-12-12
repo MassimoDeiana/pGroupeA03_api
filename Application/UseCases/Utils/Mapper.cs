@@ -3,6 +3,7 @@ using Application.UseCases.Interrogation.Dtos;
 using Application.UseCases.Meeting.Dtos;
 using Application.UseCases.Note.Dtos;
 using Application.UseCases.ParticipateMeeting.Dtos;
+using Application.UseCases.Result.Dtos;
 using Application.UseCases.SchoolClass.Dtos;
 using Application.UseCases.Student.Dtos;
 using Application.UseCases.Teacher.Dtos;
@@ -47,6 +48,8 @@ namespace Application.UseCases.Utils
 
                 cfg.CreateMap<InputDtoInterrogation, Domain.Interrogation>();
                 cfg.CreateMap<Domain.Interrogation, OutputDtoInterrogation>();
+
+                cfg.CreateMap<Domain.ResultReport, OutputDtoResult>();
 
             });
             return new AutoMapper.Mapper(config);

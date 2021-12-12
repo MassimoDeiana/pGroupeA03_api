@@ -18,3 +18,7 @@ insert into course(starttime,endtime,subject,idteacher,idclass) values ('2021-12
 insert into interrogation(idcourse,subject,total) values (1,'Matrix',20),
                                                          (2,'Aggregation',38),
                                                          (3, 'Ajax',10);
+
+insert into note(idteacher,idstudent,idinterro,datenote,result,message) values   (1,1,1,'2021-12-10', 3, 'nul'),
+                                                                                (1,1,2,'2021-13-10', 4, 'amélioration'),
+                                                                                (1,2,1,'2021-12-10', 5, 'au-dessus de la moyenne');

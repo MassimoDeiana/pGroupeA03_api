@@ -6,6 +6,7 @@ using Application.UseCases.Interrogation;
 using Application.UseCases.Meeting;
 using Application.UseCases.Note;
 using Application.UseCases.ParticipateMeeting;
+using Application.UseCases.Result;
 using Application.UseCases.SchoolClass;
 using Application.UseCases.Student;
 using Application.UseCases.Teacher;
@@ -15,6 +16,7 @@ using Infrastructure.SqlServer.Repositories.Interrogation;
 using Infrastructure.SqlServer.Repositories.Meeting;
 using Infrastructure.SqlServer.Repositories.Note;
 using Infrastructure.SqlServer.Repositories.ParticipateMeeting;
+using Infrastructure.SqlServer.Repositories.Result;
 using Infrastructure.SqlServer.Repositories.SchoolClass;
 using Infrastructure.SqlServer.Repositories.Student;
 using Infrastructure.SqlServer.Repositories.Teacher;
@@ -78,7 +80,10 @@ namespace pGroupeA03_api
             
             services.AddSingleton<CourseFactory>();
             services.AddSingleton<IEntityRepository<Course>, CourseRepository>();
-            
+
+            services.AddSingleton<ResultFactory>();
+            services.AddSingleton<IResultRepository, ResultRepository>();
+
             services.AddSingleton<IDatabaseManager, DatabaseManager>();
 
             //USECASE
@@ -133,6 +138,9 @@ namespace pGroupeA03_api
                 services.AddSingleton<UseCaseGenerateCourse>();
                 services.AddSingleton<UseCaseDeleteCourse>();
 
+                //RESULT
+                services.AddSingleton<UseCaseGenerateResult>();
+                
                 services.AddControllers();
             
             // configure strongly typed settings object

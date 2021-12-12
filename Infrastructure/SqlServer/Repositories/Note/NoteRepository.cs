@@ -1,7 +1,6 @@
 ﻿using System.Collections.Generic;
 using System.Data;
 using System.Data.SqlClient;
-using Infrastructure.SqlServer.Repositories.Student;
 using Infrastructure.SqlServer.Utils;
 
 namespace Infrastructure.SqlServer.Repositories.Note
