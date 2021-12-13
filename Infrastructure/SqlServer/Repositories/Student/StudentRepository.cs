@@ -1,12 +1,18 @@
-﻿using System.Data.SqlClient;
+﻿using System.Collections.Generic;
+using System.Data;
+using System.Data.SqlClient;
 using Infrastructure.SqlServer.Utils;
+using NotImplementedException = System.NotImplementedException;
 
 namespace Infrastructure.SqlServer.Repositories.Student
 {
     public partial class StudentRepository : EntityRepository<Domain.Student>, IStudentRepository
     {
+        private readonly StudentFactory _factory;
+        
         public StudentRepository(StudentFactory factory) : base(factory)
         {
+            _factory = factory;
         }
 
         public override Domain.Student Create(Domain.Student t)
@@ -46,6 +52,30 @@ namespace Infrastructure.SqlServer.Repositories.Student
             command.Parameters.AddWithValue("@" + StudentRepository.ColIdClass, idClass);
 
             return command.ExecuteNonQuery() > 0;
+        }
+
+        public List<Domain.Student> GetByClass(int idClass)
+        {
+            var entities = new List<Domain.Student>();
+
+            using var connection = Database.GetConnection();
+            connection.Open();
+            var command = new SqlCommand
+            {
+                Connection = connection,
+                CommandText = $@"SELECT * FROM {TableName} WHERE {ColIdClass} = @{ColIdClass}"
+            };
+
+            command.Parameters.AddWithValue("@" + ColIdClass, idClass);
+            
+            var reader = command.ExecuteReader(CommandBehavior.CloseConnection);
+
+            while (reader.Read())
+            {
+                entities.Add(_factory.CreateFromSqlReader(reader));
+            }
+
+            return entities; 
         }
     }
 }

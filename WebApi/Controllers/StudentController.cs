@@ -16,18 +16,21 @@ namespace pGroupeA03_api.Controllers
         private readonly UseCaseGenerateStudent _useCaseGenerateStudent;
         private readonly UseCaseUpdateStudent _useCaseUpdateStudent;
         private readonly UseCaseDeleteStudent _useCaseDeleteStudent;
+        private readonly UseCaseGetStudentByClass _useCaseGetStudentByClass;
 
         public StudentController(UseCaseCreateStudent useCaseCreateStudent, 
             UseCaseGetStudent useCaseGetStudent,
             UseCaseGenerateStudent useCaseGenerateStudent, 
             UseCaseUpdateStudent useCaseUpdateStudent, 
-            UseCaseDeleteStudent useCaseDeleteStudent)
+            UseCaseDeleteStudent useCaseDeleteStudent, 
+            UseCaseGetStudentByClass useCaseGetStudentByClass)
         {
             _useCaseCreateStudent = useCaseCreateStudent;
             _useCaseGetStudent = useCaseGetStudent;
             _useCaseGenerateStudent = useCaseGenerateStudent;
             _useCaseUpdateStudent = useCaseUpdateStudent;
             _useCaseDeleteStudent = useCaseDeleteStudent;
+            _useCaseGetStudentByClass = useCaseGetStudentByClass;
         }
 
         [HttpGet]
@@ -53,6 +56,26 @@ namespace pGroupeA03_api.Controllers
             {
                 Console.WriteLine(e);
                 throw new HttpListenerException(404, "Student not found");
+            }
+        }
+        
+        [HttpGet]
+        [Route("class/{id:int}")]
+        [ProducesResponseType(201)]
+        public ActionResult<List<OutputDtoStudent>> GetByClass(int id)
+        {
+            try
+            {
+                return _useCaseGetStudentByClass.Execute(
+                    new InputDtoGenerateListStudent()
+                    {
+                        IdClass = id
+                    });
+            }
+            catch (IndexOutOfRangeException e)
+            {
+                Console.WriteLine(e);
+                throw new HttpListenerException(404, "Note not found");
             }
         }
 
