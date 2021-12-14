@@ -101,6 +101,7 @@ namespace pGroupeA03_api
                 services.AddSingleton<UseCaseGenerateStudent>();
                 services.AddSingleton<UseCaseUpdateStudent>();
                 services.AddSingleton<UseCaseDeleteStudent>();
+                services.AddSingleton<UseCaseGetStudentByClass>();
 
                 //SCHOOLCLASS
                 services.AddSingleton<UseCaseCreateSchoolClass>();
