@@ -1,12 +1,14 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Net;
+using Application.Helpers;
 using Application.UseCases.Result;
 using Application.UseCases.Result.Dtos;
 using Microsoft.AspNetCore.Mvc;
 
 namespace pGroupeA03_api.Controllers
 {
+    [Authorize(new [] {Permissions.Student, Permissions.Teacher})]
     [ApiController]
     [Route("api/[controller]")]
     public class ResultController : ControllerBase

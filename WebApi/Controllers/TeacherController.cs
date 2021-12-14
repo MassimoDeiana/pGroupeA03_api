@@ -17,14 +17,14 @@ namespace pGroupeA03_api.Controllers
         private readonly UseCaseGetTeacher _useCaseGetTeacher;
         private readonly UseCaseGenerateTeacher _useCaseGenerateTeacher;
         private readonly UseCaseDeleteTeacher _useCaseDeleteTeacher;
-        private readonly TeacherService _teacherService;
+        private readonly ITeacherService _teacherService;
 
         public TeacherController(
             UseCaseCreateTeacher useCaseCreateTeacher,
             UseCaseGetTeacher useCaseGetTeacher,
             UseCaseGenerateTeacher useCaseGenerateTeacher,
             UseCaseDeleteTeacher useCaseDeleteTeacher, 
-            TeacherService teacherService) 
+            ITeacherService teacherService) 
         {
             _useCaseCreateTeacher = useCaseCreateTeacher;
             _useCaseGetTeacher = useCaseGetTeacher;
@@ -44,7 +44,6 @@ namespace pGroupeA03_api.Controllers
             return Ok(response);
         }
 
-        [Authorize]
         [HttpGet]
         [ProducesResponseType(201)]
         public ActionResult<List<OutputDtoTeacher>> GetAll()
@@ -52,7 +51,6 @@ namespace pGroupeA03_api.Controllers
             return StatusCode(201,_useCaseGetTeacher.Execute());
         }
         
-        [Authorize]
         [HttpGet]
         [Route("{id:int}")]
         [ProducesResponseType(201)]
@@ -80,7 +78,6 @@ namespace pGroupeA03_api.Controllers
             return StatusCode(201, _useCaseCreateTeacher.Execute(dto));
         }
         
-        [Authorize]
         [HttpDelete]
         [Route("{id:int}")]
         public ActionResult Delete(int id)

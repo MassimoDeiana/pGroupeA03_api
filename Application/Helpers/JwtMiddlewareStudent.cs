@@ -10,28 +10,28 @@ using Microsoft.IdentityModel.Tokens;
 
 namespace Application.Helpers
 {
-    public class JwtMiddleware
+    public class JwtMiddlewareStudent
     {
         private readonly RequestDelegate _next;
         private readonly AppSettings _appSettings;
 
-        public JwtMiddleware(RequestDelegate next, IOptions<AppSettings> appSettings)
+        public JwtMiddlewareStudent(RequestDelegate next, IOptions<AppSettings> appSettings)
         {
             _next = next;
             _appSettings = appSettings.Value;
         }
 
-        public async Task Invoke(HttpContext context, ITeacherService teacherService)
+        public async Task Invoke(HttpContext context, IStudentService studentService)
         {
             var token = context.Request.Headers["Authorization"].FirstOrDefault()?.Split(" ").Last();
 
             if (token != null)
-                AttachUserToContext(context, teacherService, token);
+                AttachUserToContext(context, studentService, token);
 
             await _next(context);
         }
 
-        private void AttachUserToContext(HttpContext context, ITeacherService teacherService, string token)
+        private void AttachUserToContext(HttpContext context, IStudentService studentService, string token)
         {
             try
             {
@@ -48,10 +48,10 @@ namespace Application.Helpers
                 }, out SecurityToken validatedToken);
 
                 var jwtToken = (JwtSecurityToken)validatedToken;
-                var teacherId = int.Parse(jwtToken.Claims.First(x => x.Type == "idteacher").Value);
+                var studentId = int.Parse(jwtToken.Claims.First(x => x.Type == "idstudent").Value);
 
                 // attach user to context on successful jwt validation
-                context.Items["Teacher"] = teacherService.GetById(teacherId);
+                context.Items["Student"] = studentService.GetById(studentId);
             }
             catch
             {

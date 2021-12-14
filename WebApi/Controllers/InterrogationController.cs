@@ -1,13 +1,14 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Net;
+using Application.Helpers;
 using Application.UseCases.Interrogation;
 using Application.UseCases.Interrogation.Dtos;
-using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 namespace pGroupeA03_api.Controllers
 {
+    [Authorize(new [] {Permissions.Teacher})]
     [ApiController]
     [Route("api/[controller]")]
     public class InterrogationController : ControllerBase

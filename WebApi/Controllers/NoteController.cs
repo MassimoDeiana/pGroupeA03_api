@@ -1,12 +1,14 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Net;
+using Application.Helpers;
 using Application.UseCases.Note;
 using Application.UseCases.Note.Dtos;
 using Microsoft.AspNetCore.Mvc;
 
 namespace pGroupeA03_api.Controllers
 {
+    [Authorize(new [] {Permissions.Teacher})]
     [ApiController]
     [Route("api/[controller]")]
     
@@ -35,7 +37,7 @@ namespace pGroupeA03_api.Controllers
             return StatusCode(201,_useCaseGetNote.Execute());
         }
         
-        
+        [Authorize(new [] {Permissions.Student})]
         [HttpGet]
         [Route("{id:int}")]
         [ProducesResponseType(201)]

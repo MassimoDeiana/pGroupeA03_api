@@ -4,7 +4,7 @@ using System.Linq;
 using System.Security.Claims;
 using System.Text;
 using Application.Helpers;
-using Application.UseCases.Teacher.Dtos;
+using Application.UseCases.Student.Dtos;
 using Domain;
 using Infrastructure.SqlServer.Utils;
 using Microsoft.Extensions.Options;
@@ -12,44 +12,44 @@ using Microsoft.IdentityModel.Tokens;
 
 namespace Application.Services
 {
-    public class TeacherService : ITeacherService
+    public class StudentService : IStudentService
     {
-        private readonly IEntityRepository<Teacher> _teacherRepository;
+        private readonly IEntityRepository<Student> _studentRepository;
         private readonly AppSettings _appSettings;
 
-        public TeacherService(IEntityRepository<Teacher> teacherRepository, IOptions<AppSettings> appSettings)
+        public StudentService(IEntityRepository<Student> studentRepository, IOptions<AppSettings> appSettings)
         {
-            _teacherRepository = teacherRepository;
+            _studentRepository = studentRepository;
             _appSettings = appSettings.Value;
         }
 
-        public OutputDtoTokenTeacher Authenticate(InputDtoGenerateTokenTeacher model)
+        public OutputDtoTokenStudent Authenticate(InputDtoGenerateTokenStudent model)
         {
-            var teacher = _teacherRepository.GetAll()
-                .SingleOrDefault(teacher => teacher.Mail == model.Mail && teacher.Password == model.Password);
+            var student = _studentRepository.GetAll()
+                .SingleOrDefault(student => student.Mail == model.Mail && student.Password == model.Password);
 
-             // return null if user not found
-            if (teacher == null) return null;
+            // return null if user not found
+            if (student == null) return null;
             
             // authentication successful so generate jwt token
-            var token = GenerateJwtToken(teacher);
+            var token = GenerateJwtToken(student);
 
-            return new OutputDtoTokenTeacher(teacher, token);
+            return new OutputDtoTokenStudent(student, token);
         }
         
-        public Teacher GetById(int id)
+        public Student GetById(int id)
         {
-            return _teacherRepository.GetById(id);
+            return _studentRepository.GetById(id);
         }
         
-        private string GenerateJwtToken(Teacher teacher)
+        private string GenerateJwtToken(Student student)
         {
             // generate token that is valid for 7 days
             var tokenHandler = new JwtSecurityTokenHandler();
             var key = Encoding.ASCII.GetBytes(_appSettings.Secret);
             var tokenDescriptor = new SecurityTokenDescriptor
             {
-                Subject = new ClaimsIdentity(new[] { new Claim("idteacher", teacher.IdTeacher.ToString()) }),
+                Subject = new ClaimsIdentity(new[] { new Claim("idstudent", student.IdStudent.ToString()) }),
                 Expires = DateTime.UtcNow.AddDays(7),
                 SigningCredentials = new SigningCredentials(new SymmetricSecurityKey(key), SecurityAlgorithms.HmacSha256Signature)
             };

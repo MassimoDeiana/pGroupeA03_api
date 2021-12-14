@@ -148,6 +148,7 @@ namespace pGroupeA03_api
             
             // configure DI for application services
             services.AddScoped<ITeacherService, TeacherService>();
+            services.AddScoped<IStudentService, StudentService>();
             
             services.AddSwaggerGen(c =>
             {
@@ -198,7 +199,8 @@ namespace pGroupeA03_api
             }
 
             // custom jwt auth middleware
-            app.UseMiddleware<JwtMiddleware>();
+            app.UseMiddleware<JwtMiddlewareTeacher>();
+            app.UseMiddleware<JwtMiddlewareStudent>();
             
             app.UseCors(MyOrigins);
 

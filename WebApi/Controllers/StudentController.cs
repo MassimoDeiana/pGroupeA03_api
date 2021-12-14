@@ -1,6 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Net;
+using Application.Helpers;
+using Application.Services;
 using Application.UseCases.Student;
 using Application.UseCases.Student.Dtos;
 using Microsoft.AspNetCore.Mvc;
@@ -16,20 +18,35 @@ namespace pGroupeA03_api.Controllers
         private readonly UseCaseGenerateStudent _useCaseGenerateStudent;
         private readonly UseCaseUpdateStudent _useCaseUpdateStudent;
         private readonly UseCaseDeleteStudent _useCaseDeleteStudent;
+        private readonly IStudentService _studentService;
 
         public StudentController(UseCaseCreateStudent useCaseCreateStudent, 
             UseCaseGetStudent useCaseGetStudent,
             UseCaseGenerateStudent useCaseGenerateStudent, 
             UseCaseUpdateStudent useCaseUpdateStudent, 
-            UseCaseDeleteStudent useCaseDeleteStudent)
+            UseCaseDeleteStudent useCaseDeleteStudent, 
+            IStudentService studentService)
         {
             _useCaseCreateStudent = useCaseCreateStudent;
             _useCaseGetStudent = useCaseGetStudent;
             _useCaseGenerateStudent = useCaseGenerateStudent;
             _useCaseUpdateStudent = useCaseUpdateStudent;
             _useCaseDeleteStudent = useCaseDeleteStudent;
+            _studentService = studentService;
         }
+        
+        [HttpPost("authenticate")]
+        public IActionResult Authenticate(InputDtoGenerateTokenStudent model)
+        {
+            var response = _studentService.Authenticate(model);
 
+            if (response == null)
+                return BadRequest(new { message = "Mail or password is incorrect" });
+
+            return Ok(response);
+        }
+        
+        [Authorize(new []{Permissions.Teacher})]
         [HttpGet]
         [ProducesResponseType(201)]
         public ActionResult<List<OutputDtoStudent>> GetAll()
@@ -37,6 +54,7 @@ namespace pGroupeA03_api.Controllers
             return StatusCode(201, _useCaseGetStudent.Execute());
         }
         
+        [Authorize(new [] {Permissions.Student, Permissions.Teacher})]
         [HttpGet]
         [Route("{id:int}")]
         public ActionResult<OutputDtoStudent> GetById(int id)
@@ -62,7 +80,6 @@ namespace pGroupeA03_api.Controllers
             //TODO EXCEPTION IDCLASSE INVALIDE
             return StatusCode(201, _useCaseCreateStudent.Execute(dto));
         }
-        
         
         [HttpPut]
         [Route("{id:int}/{idClass:int}")] //on aura un id pour la route
