@@ -24,7 +24,14 @@ DROP TABLE meeting;
 IF EXISTS (SELECT * FROM sysobjects WHERE name='teacher' and xtype='U')
 DROP TABLE teacher;
 
+IF EXISTS (SELECT * FROM sysobjects WHERE name='admin' and xtype='U')
+DROP TABLE admin;
 
+create table admin(
+idadmin int identity primary key,
+mail nvarchar(50) not null,
+password nvarchar(50) not null
+);
 
 
 create table teacher(
@@ -33,7 +40,7 @@ name varchar(50) not null,
 firstname varchar(50) not null,
 birthdate date not null,
 mail nvarchar(50) not null,
-password nvarchar(50) not null,
+password nvarchar(50) not null
 );
 
 create table schoolclass(
@@ -81,7 +88,7 @@ create table interrogation(
 idinterro int identity primary key,
 idcourse int not null foreign key(idcourse) references course(idcourse),
 subject varchar(50) not null,
-total int not null,
+total int not null
 );
 
 create table note(
@@ -91,5 +98,5 @@ idstudent int not null foreign key(idstudent) references student(idstudent),
 idinterro int not null foreign key(idinterro) references interrogation(idinterro),
 datenote datetime not null,
 result float not null,
-message varchar(80),
+message varchar(80)
 );

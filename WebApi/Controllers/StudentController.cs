@@ -49,7 +49,7 @@ namespace pGroupeA03_api.Controllers
             return Ok(response);
         }
         
-        [Authorize(new []{Permissions.Teacher})]
+        [Authorize(new []{Permissions.Teacher, Permissions.Admin})]
         [HttpGet]
         [ProducesResponseType(201)]
         public ActionResult<List<OutputDtoStudent>> GetAll()
@@ -57,7 +57,7 @@ namespace pGroupeA03_api.Controllers
             return StatusCode(201, _useCaseGetStudent.Execute());
         }
         
-        [Authorize(new [] {Permissions.Student, Permissions.Teacher})]
+        [Authorize(new [] {Permissions.Student, Permissions.Teacher, Permissions.Admin})]
         [HttpGet]
         [Route("{id:int}")]
         public ActionResult<OutputDtoStudent> GetById(int id)
@@ -77,6 +77,7 @@ namespace pGroupeA03_api.Controllers
             }
         }
         
+        [Authorize(new [] {Permissions.Teacher})]
         [HttpGet]
         [Route("class/{id:int}")]
         [ProducesResponseType(201)]
@@ -97,6 +98,7 @@ namespace pGroupeA03_api.Controllers
             }
         }
 
+        [Authorize(new [] {Permissions.Admin})]
         [HttpPost]
         public ActionResult<OutputDtoStudent> Create([FromBody] InputDtoStudent dto)
         {
@@ -104,6 +106,7 @@ namespace pGroupeA03_api.Controllers
             return StatusCode(201, _useCaseCreateStudent.Execute(dto));
         }
         
+        [Authorize(new [] {Permissions.Student})]
         [HttpPut]
         [Route("{id:int}/{idClass:int}")] //on aura un id pour la route
         public ActionResult Update(int id, int idClass)
@@ -116,6 +119,7 @@ namespace pGroupeA03_api.Controllers
             return NotFound();
         }
 
+        [Authorize(new [] {Permissions.Admin})]
         [HttpDelete]
         [Route("{id:int}")]
         public ActionResult Delete(int id)

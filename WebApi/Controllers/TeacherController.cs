@@ -44,6 +44,7 @@ namespace pGroupeA03_api.Controllers
             return Ok(response);
         }
 
+        [Authorize(new [] {Permissions.Teacher, Permissions.Admin})]
         [HttpGet]
         [ProducesResponseType(201)]
         public ActionResult<List<OutputDtoTeacher>> GetAll()
@@ -51,6 +52,7 @@ namespace pGroupeA03_api.Controllers
             return StatusCode(201,_useCaseGetTeacher.Execute());
         }
         
+        [Authorize(new [] {Permissions.Teacher, Permissions.Admin})]
         [HttpGet]
         [Route("{id:int}")]
         [ProducesResponseType(201)]
@@ -71,6 +73,7 @@ namespace pGroupeA03_api.Controllers
             }
         }
 
+        [Authorize(new [] {Permissions.Admin})]
         [HttpPost]
         [ProducesResponseType(201)]
         public ActionResult<OutputDtoTeacher> Create(InputDtoTeacher dto)
@@ -78,6 +81,7 @@ namespace pGroupeA03_api.Controllers
             return StatusCode(201, _useCaseCreateTeacher.Execute(dto));
         }
         
+        [Authorize(new [] {Permissions.Admin})]
         [HttpDelete]
         [Route("{id:int}")]
         public ActionResult Delete(int id)

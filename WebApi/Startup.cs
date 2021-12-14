@@ -11,6 +11,7 @@ using Application.UseCases.SchoolClass;
 using Application.UseCases.Student;
 using Application.UseCases.Teacher;
 using Domain;
+using Infrastructure.SqlServer.Repositories.Admin;
 using Infrastructure.SqlServer.Repositories.Course;
 using Infrastructure.SqlServer.Repositories.Interrogation;
 using Infrastructure.SqlServer.Repositories.Meeting;
@@ -84,6 +85,9 @@ namespace pGroupeA03_api
             services.AddSingleton<ResultFactory>();
             services.AddSingleton<IResultRepository, ResultRepository>();
 
+            services.AddSingleton<AdminFactory>();
+            services.AddSingleton<IEntityRepository<Admin>, AdminRepository>();
+
             services.AddSingleton<IDatabaseManager, DatabaseManager>();
 
             //USECASE
@@ -150,6 +154,7 @@ namespace pGroupeA03_api
             // configure DI for application services
             services.AddScoped<ITeacherService, TeacherService>();
             services.AddScoped<IStudentService, StudentService>();
+            services.AddScoped<IAdminService, AdminService>();
             
             services.AddSwaggerGen(c =>
             {
@@ -200,8 +205,9 @@ namespace pGroupeA03_api
             }
 
             // custom jwt auth middleware
-            app.UseMiddleware<JwtMiddlewareTeacher>();
             app.UseMiddleware<JwtMiddlewareStudent>();
+            app.UseMiddleware<JwtMiddlewareTeacher>();
+            app.UseMiddleware<JwtMiddlewareAdmin>();
             
             app.UseCors(MyOrigins);
 

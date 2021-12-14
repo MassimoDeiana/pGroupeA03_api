@@ -30,8 +30,6 @@ namespace pGroupeA03_api.Controllers
             _useCaseDeleteInterrogation = useCaseDeleteInterrogation;
         }
         
-        
-
         [HttpGet]
         [ProducesResponseType(201)]
         public ActionResult<List<OutputDtoInterrogation>> GetAll()
@@ -65,8 +63,7 @@ namespace pGroupeA03_api.Controllers
         {
             return StatusCode(201, _useCaseCreateInterrogation.Execute(dto));
         }
-        
-        
+
         [HttpDelete]
         [Route("{id:int}")]
         public ActionResult Delete(int id)

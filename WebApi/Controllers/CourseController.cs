@@ -4,7 +4,6 @@ using System.Net;
 using Application.Helpers;
 using Application.UseCases.Course;
 using Application.UseCases.Course.Dtos;
-using Infrastructure.SqlServer.Repositories.Course;
 using Microsoft.AspNetCore.Mvc;
 
 namespace pGroupeA03_api.Controllers

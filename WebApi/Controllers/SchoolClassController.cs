@@ -2,12 +2,14 @@
 using System.Collections.Generic;
 using System.Data.SqlClient;
 using System.Net;
+using Application.Helpers;
 using Application.UseCases.SchoolClass;
 using Application.UseCases.SchoolClass.Dtos;
 using Microsoft.AspNetCore.Mvc;
 
 namespace pGroupeA03_api.Controllers
 {
+    [Authorize(new [] {Permissions.Teacher})]
     [ApiController]
     [Route("api/[controller]")]
     public class SchoolClassController : ControllerBase

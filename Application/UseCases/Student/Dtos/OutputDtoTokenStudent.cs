@@ -6,9 +6,9 @@
 
         public string Token { get; set; }
         
-        public OutputDtoTokenStudent(Domain.Student teacher, string token)
+        public OutputDtoTokenStudent(Domain.Student student, string token)
         {
-            IdStudent = teacher.IdStudent;
+            IdStudent = student.IdStudent;
             Token = token;
         }
     }
