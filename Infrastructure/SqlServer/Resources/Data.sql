@@ -24,8 +24,8 @@ insert into interrogation(idlesson,subject,total) values (1,'Matrix',20),
                                                          (2,'Aggregation',38),
                                                          (3, 'Ajax',10);
 
-insert into note(idteacher,idstudent,idinterro,datenote,result,message) values (1,1,1,'2021-12-10', 3, 'nul'),
-                                                                               (1,1,2,'2021-13-10', 4, 'amélioration'),
-                                                                               (1,2,1,'2021-12-10', 5, 'au-dessus de la moyenne');
+insert into note(idteacher,idstudent,idinterro,datenote,result,message) values (1,3,1,'2021-12-10', 3, 'nul'),
+                                                                               (1,3,2,'2021-13-10', 4, 'amélioration'),
+                                                                               (1,3,3,'2021-12-10', 5, 'au-dessus de la moyenne');
 
 insert into admin(mail,password) values ('OrlandoPalermo@gmail.com','password1');

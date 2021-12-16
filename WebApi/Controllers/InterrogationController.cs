@@ -30,6 +30,7 @@ namespace pGroupeA03_api.Controllers
             _useCaseDeleteInterrogation = useCaseDeleteInterrogation;
         }
         
+        [Authorize(new [] {Permissions.Teacher,Permissions.Admin,Permissions.Student})]
         [HttpGet]
         [ProducesResponseType(201)]
         public ActionResult<List<OutputDtoInterrogation>> GetAll()
@@ -37,6 +38,7 @@ namespace pGroupeA03_api.Controllers
             return StatusCode(201,_useCaseGetInterrogation.Execute());
         }
         
+        [Authorize(new [] {Permissions.Teacher,Permissions.Admin,Permissions.Student})]
         [HttpGet]
         [Route("{id:int}")]
         [ProducesResponseType(201)]

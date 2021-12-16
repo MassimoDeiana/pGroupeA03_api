@@ -8,6 +8,7 @@
             ColIdInterro = "idinterro",
             ColResult = "result",
             ColTotal = "total",
-            ColIdLesson = "idlesson";
+            ColIdLesson = "idlesson",
+            ColMessage = "message";
     }
 }

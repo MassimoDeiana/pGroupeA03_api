@@ -9,7 +9,6 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace pGroupeA03_api.Controllers
 {
-    [Authorize(new [] {Permissions.Admin})]
     [ApiController]
     [Route("api/[controller]")]
     public class LessonController : ControllerBase
@@ -30,7 +29,7 @@ namespace pGroupeA03_api.Controllers
             _useCaseGenerateLesson = useCaseGenerateLesson;
         }
         
-        [Authorize(new [] {Permissions.Teacher, Permissions.Admin})]
+        [Authorize(new [] {Permissions.Teacher, Permissions.Admin, Permissions.Student})]
         [HttpGet]
         [ProducesResponseType(201)]
         public ActionResult<List<OutputDtoLesson>> GetAll()
@@ -38,7 +37,7 @@ namespace pGroupeA03_api.Controllers
             return StatusCode(201,_useCaseGetLesson.Execute());
         }
         
-        [Authorize(new [] {Permissions.Teacher, Permissions.Admin})]
+        [Authorize(new [] {Permissions.Teacher, Permissions.Admin, Permissions.Student})]
         [HttpGet]
         [Route("{id:int}")]
         [ProducesResponseType(201)]

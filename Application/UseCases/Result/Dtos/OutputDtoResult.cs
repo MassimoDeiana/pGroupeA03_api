@@ -11,5 +11,7 @@
         public int Total { get; set; }
 
         public int IdLesson { get; set; }
+        
+        public string Message { get; set; }
     }
 }

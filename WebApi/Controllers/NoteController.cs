@@ -29,7 +29,7 @@ namespace pGroupeA03_api.Controllers
             _useCaseDeleteNote = useCaseDeleteNote;
         }
         
-        [Authorize(new [] {Permissions.Teacher,Permissions.Admin})]
+        [Authorize(new [] {Permissions.Teacher,Permissions.Admin, Permissions.Student})]
         [HttpGet]
         [ProducesResponseType(201)]
         public ActionResult<List<OutputDtoNote>> GetAll()
