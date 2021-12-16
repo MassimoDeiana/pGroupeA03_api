@@ -11,7 +11,7 @@ namespace Infrastructure.SqlServer.Repositories.Interrogation
             return new Domain.Interrogation
             {
                 IdInterro = reader.GetInt32(reader.GetOrdinal(InterrogationRepository.ColId)),
-                IdCourse = reader.GetInt32(reader.GetOrdinal(InterrogationRepository.ColIdCourse)),
+                IdLesson = reader.GetInt32(reader.GetOrdinal(InterrogationRepository.ColIdLesson)),
                 Subject = reader.GetString(reader.GetOrdinal(InterrogationRepository.ColSubject)),
                 Total = reader.GetInt32(reader.GetOrdinal(InterrogationRepository.ColTotal))
             };

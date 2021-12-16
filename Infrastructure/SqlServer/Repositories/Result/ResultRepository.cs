@@ -23,7 +23,7 @@ namespace Infrastructure.SqlServer.Repositories.Result
             {
                 Connection = connection,
                 CommandText = $@"
-                select {TableName}.{ColIdStudent},{TableName}.{ColIdInterro},{TableName}.{ColResult},interrogation.total 
+                select {TableName}.{ColIdStudent},{TableName}.{ColIdInterro},{TableName}.{ColResult},interrogation.total, interrogation.idlesson
                 from {TableName} inner join interrogation on {TableName}.{ColIdInterro} = interrogation.{ColIdInterro} 
                 where {ColIdStudent} = @{ColIdStudent}"
             };

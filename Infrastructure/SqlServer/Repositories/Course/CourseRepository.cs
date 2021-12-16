@@ -22,10 +22,10 @@ namespace Infrastructure.SqlServer.Repositories.Course
                 Connection = connection,
                 CommandText = ReqCreate
             };
-            
+
+            command.Parameters.AddWithValue("@" + ColIdLesson, t.IdLesson);
             command.Parameters.AddWithValue("@" + ColStart, t.StartTime);
             command.Parameters.AddWithValue("@" + ColEnd, t.EndTime);
-            command.Parameters.AddWithValue("@" + ColSubject, t.Subject);
             command.Parameters.AddWithValue("@" + ColIdTeacher, t.IdTeacher);
             command.Parameters.AddWithValue("@" + ColIdClass, t.IdClass);
 

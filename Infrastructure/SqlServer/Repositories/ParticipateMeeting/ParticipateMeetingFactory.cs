@@ -11,7 +11,6 @@ namespace Infrastructure.SqlServer.Repositories.ParticipateMeeting
             {
                 IdMeeting = reader.GetInt32(reader.GetOrdinal(ParticipateMeetingRepository.ColIdMeeting)),
                 IdTeacher = reader.GetInt32(reader.GetOrdinal(ParticipateMeetingRepository.ColIdTeacher)),
-                DateMeeting = reader.GetDateTime(reader.GetOrdinal(ParticipateMeetingRepository.ColDate))
             };
         }
     }

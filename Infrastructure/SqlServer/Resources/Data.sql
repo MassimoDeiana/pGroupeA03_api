@@ -11,11 +11,16 @@ insert into student(name,firstname,birthdate,mail,password,idclass) values ('Vin
 insert into meeting(subject,starttime,endtime) values ('Réunion pour péter les élèves','2021-10-03T14:00:00','2021-10-03T16:00:00'),
                                                       ('Formation numérique', '2021-10-04T16:00:00','2021-10-04T18:00:00');
 
-insert into course(starttime,endtime,subject,idteacher,idclass) values ('2021-12-10T13:00:00','2021-12-10T15:00:00','Math',1,1),
-                                                                       ('2021-12-10T15:30:00','2021-12-10T17:00:00','POO',2,2),
-                                                                       ('2021-12-10T09:00:00','2021-12-10T11:00:00','TI',3,1);
+insert into lesson(subject) values ('POO'),
+                                   ('ACP'),
+                                   ('CPP'),
+                                   ('TDD');
 
-insert into interrogation(idcourse,subject,total) values (1,'Matrix',20),
+insert into course(idlesson,starttime,endtime,idteacher,idclass) values (1,'2021-12-10T13:00:00','2021-12-10T15:00:00',1,1),
+                                                                       (2,'2021-12-10T15:30:00','2021-12-10T17:00:00',2,2),
+                                                                       (3,'2021-12-10T09:00:00','2021-12-10T11:00:00',3,1);
+
+insert into interrogation(idlesson,subject,total) values (1,'Matrix',20),
                                                          (2,'Aggregation',38),
                                                          (3, 'Ajax',10);
 

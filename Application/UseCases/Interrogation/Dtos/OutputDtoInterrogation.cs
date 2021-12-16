@@ -4,7 +4,7 @@
     {
         public int IdInterro { get; set; }
 
-        public int IdCourse { get; set; }
+        public int IdLesson { get; set; }
 
         public string Subject { get; set; }
 

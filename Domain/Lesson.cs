@@ -1,14 +1,9 @@
 ﻿namespace Domain
 {
-    public class Interrogation
+    public class Lesson
     {
-        public int IdInterro { get; set; }
-
         public int IdLesson { get; set; }
 
         public string Subject { get; set; }
-
-        public int Total { get; set; }
-
     }
 }

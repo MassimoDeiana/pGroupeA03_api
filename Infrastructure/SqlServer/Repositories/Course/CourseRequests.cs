@@ -5,14 +5,14 @@
         private const string TableName = "course";
 
         public const string ColId = "idcourse",
+            ColIdLesson = "idlesson",
             ColStart = "starttime",
             ColEnd = "endtime",
-            ColSubject = "subject",
             ColIdTeacher = "idteacher",
             ColIdClass = "idclass";
         
-        private static readonly string ReqCreate = $@"INSERT INTO {TableName}({ColStart},{ColEnd},{ColSubject},{ColIdTeacher},{ColIdClass}) OUTPUT INSERTED.{ColId} 
-                                                    VALUES(@{ColStart},@{ColEnd},@{ColSubject},@{ColIdTeacher},@{ColIdClass})";
+        private static readonly string ReqCreate = $@"INSERT INTO {TableName}({ColIdLesson},{ColStart},{ColEnd},{ColIdTeacher},{ColIdClass}) OUTPUT INSERTED.{ColId} 
+                                                    VALUES(@{ColIdLesson},@{ColStart},@{ColEnd},@{ColIdTeacher},@{ColIdClass})";
         
     }
 }

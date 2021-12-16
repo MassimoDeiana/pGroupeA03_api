@@ -21,7 +21,7 @@ namespace Infrastructure.SqlServer.Repositories.Interrogation
                 CommandText = ReqCreate
             };
 
-            command.Parameters.AddWithValue("@" + ColIdCourse, t.IdCourse);
+            command.Parameters.AddWithValue("@" + ColIdLesson, t.IdLesson);
             command.Parameters.AddWithValue("@" + ColSubject, t.Subject);
             command.Parameters.AddWithValue("@" + ColTotal, t.Total);
 

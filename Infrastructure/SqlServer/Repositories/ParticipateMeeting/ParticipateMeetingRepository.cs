@@ -24,7 +24,6 @@ namespace Infrastructure.SqlServer.Repositories.ParticipateMeeting
             };
             command.Parameters.AddWithValue("@" + ColIdMeeting, t.IdMeeting);
             command.Parameters.AddWithValue("@" + ColIdTeacher, t.IdTeacher);
-            command.Parameters.AddWithValue("@" + ColDate, t.DateMeeting);
 
 
             command.ExecuteScalar();

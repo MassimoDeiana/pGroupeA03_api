@@ -6,6 +6,5 @@ namespace Application.UseCases.ParticipateMeeting.Dtos
     {
         public int IdMeeting { get; set; }
         public int IdTeacher { get; set; }
-        public DateTime DateMeeting { get; set; }
     }
 }

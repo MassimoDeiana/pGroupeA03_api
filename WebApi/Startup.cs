@@ -3,6 +3,7 @@ using Application.Helpers;
 using Application.Services;
 using Application.UseCases.Course;
 using Application.UseCases.Interrogation;
+using Application.UseCases.Lesson;
 using Application.UseCases.Meeting;
 using Application.UseCases.Note;
 using Application.UseCases.ParticipateMeeting;
@@ -14,6 +15,7 @@ using Domain;
 using Infrastructure.SqlServer.Repositories.Admin;
 using Infrastructure.SqlServer.Repositories.Course;
 using Infrastructure.SqlServer.Repositories.Interrogation;
+using Infrastructure.SqlServer.Repositories.Lesson;
 using Infrastructure.SqlServer.Repositories.Meeting;
 using Infrastructure.SqlServer.Repositories.Note;
 using Infrastructure.SqlServer.Repositories.ParticipateMeeting;
@@ -88,6 +90,9 @@ namespace pGroupeA03_api
             services.AddSingleton<AdminFactory>();
             services.AddSingleton<IEntityRepository<Admin>, AdminRepository>();
 
+            services.AddSingleton<LessonFactory>();
+            services.AddSingleton<IEntityRepository<Lesson>, LessonRepository>();
+
             services.AddSingleton<IDatabaseManager, DatabaseManager>();
 
             //USECASE
@@ -142,6 +147,12 @@ namespace pGroupeA03_api
                 services.AddSingleton<UseCaseGetCourse>();
                 services.AddSingleton<UseCaseGenerateCourse>();
                 services.AddSingleton<UseCaseDeleteCourse>();
+                
+                //LESSON
+                services.AddSingleton<UseCaseCreateLesson>();
+                services.AddSingleton<UseCaseGetLesson>();
+                services.AddSingleton<UseCaseGenerateLesson>();
+                services.AddSingleton<UseCaseDeleteLesson>();
 
                 //RESULT
                 services.AddSingleton<UseCaseGenerateResult>();

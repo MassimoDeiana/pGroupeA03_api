@@ -7,6 +7,7 @@
         public const string ColIdStudent = "idstudent",
             ColIdInterro = "idinterro",
             ColResult = "result",
-            ColTotal = "total";
+            ColTotal = "total",
+            ColIdLesson = "idlesson";
     }
 }

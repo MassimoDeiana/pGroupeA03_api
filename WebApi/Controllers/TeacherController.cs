@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Data.SqlClient;
 using System.Net;
 using Application.Helpers;
 using Application.Services;
@@ -9,6 +10,7 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace pGroupeA03_api.Controllers
 {
+    [Authorize(new [] {Permissions.Admin})]
     [ApiController]
     [Route("api/[controller]")]
     public class TeacherController : ControllerBase
@@ -86,13 +88,29 @@ namespace pGroupeA03_api.Controllers
         [Route("{id:int}")]
         public ActionResult Delete(int id)
         {
-            if (_useCaseDeleteTeacher.Execute(
-                new InputDtoGenerateTeacher {
-                    IdTeacher = id
-                }))
+            try
             {
-                return Ok();
+                if (_useCaseDeleteTeacher.Execute(
+                    new InputDtoGenerateTeacher
+                    {
+                        IdTeacher = id
+                    }))
+                {
+                    return Ok();
+                }
             }
+            catch (SqlException e)
+            {
+                if (e.Errors.Count > 0)
+                {
+                    throw e.Errors[0].Number switch
+                    {
+                        547 => new InvalidOperationException("Teacher gave at least one course."),
+                        _ => new Exception()
+                    };
+                }
+            }
+
             return NotFound();
         }
     }

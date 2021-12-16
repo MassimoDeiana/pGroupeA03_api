@@ -6,6 +6,5 @@ namespace Domain
     {
         public int IdMeeting { get; set; }
         public int IdTeacher { get; set; }
-        public DateTime DateMeeting { get; set; }
     }
 }

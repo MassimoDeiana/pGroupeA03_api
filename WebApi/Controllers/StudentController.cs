@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Data.SqlClient;
 using System.Net;
 using Application.Helpers;
 using Application.Services;
@@ -9,6 +10,7 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace pGroupeA03_api.Controllers
 {
+    [Authorize(new [] {Permissions.Admin})]
     [ApiController]
     [Route("api/[controller]")]
     public class StudentController : ControllerBase
@@ -77,7 +79,7 @@ namespace pGroupeA03_api.Controllers
             }
         }
         
-        [Authorize(new [] {Permissions.Teacher})]
+        [Authorize(new [] {Permissions.Teacher,Permissions.Admin})]
         [HttpGet]
         [Route("class/{id:int}")]
         [ProducesResponseType(201)]
@@ -106,7 +108,7 @@ namespace pGroupeA03_api.Controllers
             return StatusCode(201, _useCaseCreateStudent.Execute(dto));
         }
         
-        [Authorize(new [] {Permissions.Student})]
+        [Authorize(new [] {Permissions.Student,Permissions.Admin})]
         [HttpPut]
         [Route("{id:int}/{idClass:int}")] //on aura un id pour la route
         public ActionResult Update(int id, int idClass)
@@ -124,13 +126,28 @@ namespace pGroupeA03_api.Controllers
         [Route("{id:int}")]
         public ActionResult Delete(int id)
         {
-            if (_useCaseDeleteStudent.Execute(
-                new InputDtoGenerateStudent {
-                    IdStudent = id
-                })) 
+            try
             {
-                return Ok();
+                if (_useCaseDeleteStudent.Execute(
+                    new InputDtoGenerateStudent {
+                        IdStudent = id
+                    })) 
+                {
+                    return Ok();
+                }
             }
+            catch (SqlException e)
+            {
+                if (e.Errors.Count > 0)
+                {
+                    throw e.Errors[0].Number switch
+                    {
+                        547 => new InvalidOperationException("Can't delete that student."),
+                        _ => new Exception()
+                    };
+                }
+            }
+        
 
             return NotFound();
         }

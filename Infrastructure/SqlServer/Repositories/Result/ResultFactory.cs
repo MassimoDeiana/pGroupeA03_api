@@ -12,7 +12,9 @@ namespace Infrastructure.SqlServer.Repositories.Result
                 IdStudent = reader.GetInt32(reader.GetOrdinal(ResultRepository.ColIdStudent)),
                 IdInterro = reader.GetInt32(reader.GetOrdinal(ResultRepository.ColIdInterro)),
                 Result = reader.GetDouble(reader.GetOrdinal(ResultRepository.ColResult)),
-                Total = reader.GetInt32(reader.GetOrdinal(ResultRepository.ColTotal))
+                Total = reader.GetInt32(reader.GetOrdinal(ResultRepository.ColTotal)),
+                IdLesson = reader.GetInt32(reader.GetOrdinal(ResultRepository.ColIdLesson))
+                
             };
         }
     }

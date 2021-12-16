@@ -8,7 +8,7 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace pGroupeA03_api.Controllers
 {
-    [Authorize(new [] {Permissions.Teacher})]
+    [Authorize(new [] {Permissions.Teacher, Permissions.Admin})]
     [ApiController]
     [Route("api/[controller]")]
     
@@ -31,6 +31,7 @@ namespace pGroupeA03_api.Controllers
             _useCaseDeleteCourse = useCaseDeleteCourse;
         }
 
+        [Authorize(new [] {Permissions.Student,Permissions.Admin})]
         [HttpGet]
         [ProducesResponseType(201)]
         public ActionResult<List<OutputDtoCourse>> GetAll()

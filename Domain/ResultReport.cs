@@ -6,5 +6,7 @@
         public int IdInterro { get; set; }
         public double Result { get; set; }
         public int Total { get; set; }
+
+        public int IdLesson { get; set; }
     }
 }

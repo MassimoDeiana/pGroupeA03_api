@@ -27,6 +27,9 @@ DROP TABLE teacher;
 IF EXISTS (SELECT * FROM sysobjects WHERE name='admin' and xtype='U')
 DROP TABLE admin;
 
+IF EXISTS (SELECT * FROM sysobjects WHERE name='lesson' and xtype='U')
+DROP TABLE lesson;
+
 create table admin(
 idadmin int identity primary key,
 mail nvarchar(50) not null,
@@ -50,6 +53,11 @@ year tinyint not null,
 nbstudent int not null
 );
 
+create table lesson(
+idlesson int identity primary key,
+subject varchar(50)
+);
+
 create table meeting(
 idmeeting int identity primary key,
 subject varchar(50) not null,
@@ -69,9 +77,9 @@ idclass int not null foreign key(idclass) references schoolclass(idclass)
 
 create table course(
 idcourse int identity primary key,
+idlesson int not null foreign key(idlesson) references lesson(idlesson),
 starttime datetime not null,
 endtime datetime not null,
-subject varchar(50) not null,
 idteacher int not null foreign key(idteacher) references teacher(idteacher),
 idclass int not null foreign key(idclass) references schoolclass(idclass),
 );
@@ -80,13 +88,12 @@ idclass int not null foreign key(idclass) references schoolclass(idclass),
 create table participatemeeting(
 idmeeting int not null foreign key(idmeeting) references meeting(idmeeting),
 idteacher int not null foreign key(idteacher) references teacher(idteacher),
-datemeeting date not null,
-primary key(idmeeting,idteacher,datemeeting)
+primary key(idmeeting,idteacher)
 );
 
 create table interrogation(
 idinterro int identity primary key,
-idcourse int not null foreign key(idcourse) references course(idcourse),
+idlesson int not null foreign key(idlesson) references lesson(idlesson),
 subject varchar(50) not null,
 total int not null
 );

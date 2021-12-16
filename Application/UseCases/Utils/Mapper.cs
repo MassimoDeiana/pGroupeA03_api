@@ -1,5 +1,6 @@
 ﻿using Application.UseCases.Course.Dtos;
 using Application.UseCases.Interrogation.Dtos;
+using Application.UseCases.Lesson.Dtos;
 using Application.UseCases.Meeting.Dtos;
 using Application.UseCases.Note.Dtos;
 using Application.UseCases.ParticipateMeeting.Dtos;
@@ -48,6 +49,9 @@ namespace Application.UseCases.Utils
 
                 cfg.CreateMap<InputDtoInterrogation, Domain.Interrogation>();
                 cfg.CreateMap<Domain.Interrogation, OutputDtoInterrogation>();
+                
+                cfg.CreateMap<InputDtoLesson,Domain.Lesson>();
+                cfg.CreateMap<Domain.Lesson,OutputDtoLesson>();
 
                 cfg.CreateMap<Domain.ResultReport, OutputDtoResult>();
 
