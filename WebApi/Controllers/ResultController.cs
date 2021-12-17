@@ -37,7 +37,6 @@ namespace pGroupeA03_api.Controllers
                 Console.WriteLine(e);
                 throw new HttpListenerException(404, "Result not found");
             }
-            
         }
     }
 }

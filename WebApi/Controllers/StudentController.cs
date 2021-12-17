@@ -146,10 +146,7 @@ namespace pGroupeA03_api.Controllers
                     };
                 }
             }
-        
-
             return NotFound();
         }
     }
-    
 }

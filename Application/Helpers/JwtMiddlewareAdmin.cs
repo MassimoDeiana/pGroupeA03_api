@@ -20,8 +20,12 @@ namespace Application.Helpers
             _next = next;
             _appSettings = appSettings.Value;
         }
-
-        public async Task Invoke(HttpContext context, IAdminService adminService)
+        
+         /**
+          * Méthode permettant de vérifier si un token doit être précisé dans l'en-tête de la requête
+          * Si oui, la méthode AttachUserToContext est appelée
+          */
+         public async Task Invoke(HttpContext context, IAdminService adminService)
         {
             var token = context.Request.Headers["Authorization"].FirstOrDefault()?.Split(" ").Last();
 
@@ -30,8 +34,9 @@ namespace Application.Helpers
 
             await _next(context);
         }
-
-        private void AttachUserToContext(HttpContext context, IAdminService adminService, string token)
+         
+          //Méthode permettant de valider le token, d'extraire l'id de l'utilisateur et de l'attacher au contexte
+          private void AttachUserToContext(HttpContext context, IAdminService adminService, string token)
         {
             try
             {

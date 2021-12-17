@@ -21,6 +21,10 @@ namespace Application.Helpers
             _appSettings = appSettings.Value;
         }
 
+        /**
+          * Méthode permettant de vérifier si un token doit être précisé dans l'en-tête de la requête
+          * Si oui, la méthode AttachUserToContext est appelée
+          */
         public async Task Invoke(HttpContext context, ITeacherService teacherService)
         {
             var token = context.Request.Headers["Authorization"].FirstOrDefault()?.Split(" ").Last();
@@ -31,6 +35,7 @@ namespace Application.Helpers
             await _next(context);
         }
 
+        //Méthode permettant de valider le token, d'extraire l'id de l'utilisateur et de l'attacher au contexte
         private void AttachUserToContext(HttpContext context, ITeacherService teacherService, string token)
         {
             try

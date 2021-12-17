@@ -27,7 +27,7 @@ namespace Application.Services
             var admin = _adminRepository.GetAll()
                 .SingleOrDefault(student => student.Mail == model.Mail && student.Password == model.Password);
 
-            // return null if user not found
+            // return null if admin not found
             if (admin == null) return null;
             
             // authentication successful so generate jwt token

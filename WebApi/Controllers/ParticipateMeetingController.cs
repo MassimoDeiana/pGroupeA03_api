@@ -74,7 +74,6 @@ namespace pGroupeA03_api.Controllers
             {
                 return Ok();
             }
-
             return NotFound();
         }
     }

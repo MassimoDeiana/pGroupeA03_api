@@ -14,7 +14,6 @@ namespace pGroupeA03_api.Controllers
     
     public class CourseController : ControllerBase
     {
-        
         private readonly UseCaseCreateCourse _useCaseCreateCourse;
         private readonly UseCaseGetCourse _useCaseGetCourse;
         private readonly UseCaseGenerateCourse _useCaseGenerateCourse;
@@ -31,15 +30,13 @@ namespace pGroupeA03_api.Controllers
             _useCaseDeleteCourse = useCaseDeleteCourse;
         }
 
-        [Authorize(new [] {Permissions.Student,Permissions.Admin})]
         [HttpGet]
         [ProducesResponseType(201)]
         public ActionResult<List<OutputDtoCourse>> GetAll()
         {
             return StatusCode(201,_useCaseGetCourse.Execute());
         }
-        
-        
+
         [HttpGet]
         [Route("{id:int}")]
         [ProducesResponseType(201)]
@@ -66,7 +63,6 @@ namespace pGroupeA03_api.Controllers
             return StatusCode(201, _useCaseCreateCourse.Execute(dto));
         }
         
-
         [HttpDelete]
         [Route("{id:int}")]
         public ActionResult Delete(int id)

@@ -38,7 +38,6 @@ namespace pGroupeA03_api.Controllers
             return StatusCode(201,_useCaseGetMeeting.Execute());
         }
         
-        
         [HttpGet]
         [Route("{id:int}")]
         [ProducesResponseType(201)]
@@ -65,7 +64,6 @@ namespace pGroupeA03_api.Controllers
         {
             return StatusCode(201, _useCaseCreateMeeting.Execute(dto));
         }
-        
 
         [HttpDelete]
         [Route("{id:int}")]
@@ -81,7 +79,5 @@ namespace pGroupeA03_api.Controllers
             }
             return NotFound();
         }
-        
     }
-    
 }

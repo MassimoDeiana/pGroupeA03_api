@@ -2,7 +2,6 @@
 {
     public class InputDtoGenerateCourse
     {
-        
         public int IdCourse { get; set; }
         
     }
