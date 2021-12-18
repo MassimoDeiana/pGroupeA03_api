@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Data.SqlClient;
 using System.Net;
 using Application.Helpers;
+using Application.Helpers.Attributes;
 using Application.UseCases.SchoolClass;
 using Application.UseCases.SchoolClass.Dtos;
 using Microsoft.AspNetCore.Mvc;
@@ -81,6 +82,7 @@ namespace pGroupeA03_api.Controllers
             { 
                 if(e.Errors.Count > 0)
                 {
+                    // Ne catch que la première erreur
                     throw e.Errors[0].Number switch
                     {
                         547 => new InvalidOperationException("At least one student remains in the class."),

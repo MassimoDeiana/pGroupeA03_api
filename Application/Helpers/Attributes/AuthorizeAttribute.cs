@@ -5,7 +5,7 @@ using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Filters;
 
-namespace Application.Helpers
+namespace Application.Helpers.Attributes
 {
     /**
      * Attribut permettant de vérifier si l'utilisateur a les droits d'effectuer la requête
@@ -22,6 +22,7 @@ namespace Application.Helpers
         public void OnAuthorization(AuthorizationFilterContext context)
         {
             // Si entity = null et que l'utilisateur possède l'une des permissions, on affecte le type d'utilisateur à entity
+            // Si l'utilisateur attaché au contexte ne correspond pas à la permission requise, entity reste null
             var entity = _permissions.Aggregate<Permissions, object>(null, (current, permission) => current switch
             {
                 null when permission == Permissions.Admin => context.HttpContext.Items["Admin"],

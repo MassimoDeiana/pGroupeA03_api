@@ -1,7 +1,7 @@
 namespace Application.Helpers
 {
     /**
-     * Objet contenant le secret utilisé pour générer le token
+     * Classe contenant le secret utilisé pour générer le token
      */
     public class AppSettings
     {

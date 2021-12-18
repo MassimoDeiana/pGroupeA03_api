@@ -1,6 +1,7 @@
 ﻿using System;
 using System.ComponentModel.DataAnnotations;
 using Application.Helpers;
+using Application.Helpers.Attributes;
 
 namespace Application.UseCases.Teacher.Dtos
 {

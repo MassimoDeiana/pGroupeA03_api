@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Net;
 using Application.Helpers;
+using Application.Helpers.Attributes;
 using Application.UseCases.Interrogation;
 using Application.UseCases.Interrogation.Dtos;
 using Microsoft.AspNetCore.Mvc;
@@ -53,7 +54,7 @@ namespace pGroupeA03_api.Controllers
             catch (IndexOutOfRangeException e)
             {
                 Console.WriteLine(e);
-                throw new HttpListenerException(404, "Teacher not found");
+                throw new HttpListenerException(404, "Interogation not found");
             }
         }
 
@@ -77,6 +78,5 @@ namespace pGroupeA03_api.Controllers
             }
             return NotFound();
         }
-        
     }
 }

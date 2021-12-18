@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Net;
 using Application.Helpers;
+using Application.Helpers.Attributes;
 using Application.UseCases.Note;
 using Application.UseCases.Note.Dtos;
 using Microsoft.AspNetCore.Mvc;

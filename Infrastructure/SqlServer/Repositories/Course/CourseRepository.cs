@@ -1,8 +1,5 @@
-﻿using System.Collections.Generic;
-using System.Data;
-using System.Data.SqlClient;
+﻿using System.Data.SqlClient;
 using Infrastructure.SqlServer.Utils;
-using NotImplementedException = System.NotImplementedException;
 
 namespace Infrastructure.SqlServer.Repositories.Course
 {
@@ -31,6 +28,7 @@ namespace Infrastructure.SqlServer.Repositories.Course
 
             t.IdCourse = (int) command.ExecuteScalar();
 
-            return t;        }
+            return t;
+        }
     }
 }

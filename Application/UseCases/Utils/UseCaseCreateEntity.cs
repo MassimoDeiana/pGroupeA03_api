@@ -2,6 +2,9 @@
 
 namespace Application.UseCases.Utils
 {
+    /**
+     * Classe générique automatisant un use case permettant de créer un objet
+     */
     public class UseCaseCreateEntity<TOut, TIn, TDom> : IWriting<TOut, TIn>
     {
         private readonly IEntityRepository<TDom> _repository;
@@ -10,8 +13,7 @@ namespace Application.UseCases.Utils
         {
             _repository = repository;
         }
-
-
+        
         public TOut Execute(TIn dto)
         {
             var entityFromDto = Mapper.GetInstance().Map<TDom>(dto);

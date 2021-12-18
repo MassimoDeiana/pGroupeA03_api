@@ -4,6 +4,9 @@ using Infrastructure.SqlServer.Utils;
 
 namespace Application.UseCases.Utils
 {
+    /**
+     * Classe générique automatisant un use case permettant de récupérer la liste des objets contenus dans une table
+     */
     public class UseCaseGetEntity<TOut, TDom> : IQuery<List<TOut>>
     {
         private readonly IEntityRepository<TDom> _repository;

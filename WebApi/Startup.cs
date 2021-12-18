@@ -1,5 +1,6 @@
 using System.Collections.Generic;
 using Application.Helpers;
+using Application.Helpers.JwtMiddleware;
 using Application.Services;
 using Application.UseCases.Course;
 using Application.UseCases.Interrogation;
@@ -167,6 +168,7 @@ namespace pGroupeA03_api
             services.AddScoped<IStudentService, StudentService>();
             services.AddScoped<IAdminService, AdminService>();
             
+            // Configure une interface sur Swagger permettant de stocker le token
             services.AddSwaggerGen(c =>
             {
                 c.SwaggerDoc("v1", new OpenApiInfo {Title = "WebApi", Version = "v1"});

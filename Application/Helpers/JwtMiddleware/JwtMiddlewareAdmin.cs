@@ -8,7 +8,7 @@ using Microsoft.AspNetCore.Http;
 using Microsoft.Extensions.Options;
 using Microsoft.IdentityModel.Tokens;
 
-namespace Application.Helpers
+namespace Application.Helpers.JwtMiddleware
 {
     public class JwtMiddlewareAdmin
     {

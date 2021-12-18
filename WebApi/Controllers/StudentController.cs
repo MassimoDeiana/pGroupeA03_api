@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Data.SqlClient;
 using System.Net;
 using Application.Helpers;
+using Application.Helpers.Attributes;
 using Application.Services;
 using Application.UseCases.Student;
 using Application.UseCases.Student.Dtos;
@@ -141,6 +142,7 @@ namespace pGroupeA03_api.Controllers
                 {
                     throw e.Errors[0].Number switch
                     {
+                        // Ne catch que la première erreur
                         547 => new InvalidOperationException("Can't delete that student."),
                         _ => new Exception()
                     };

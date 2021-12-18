@@ -6,7 +6,6 @@ using Infrastructure.SqlServer.Utils;
 namespace Application.UseCases.Course
 {
     public class UseCaseCreateCourse : UseCaseCreateEntity<OutputDtoCourse,InputDtoCourse,Domain.Course>
-
     {
         public UseCaseCreateCourse(IEntityRepository<Domain.Course> repository) : base(repository)
         {

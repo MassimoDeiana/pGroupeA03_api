@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Data.SqlClient;
 using System.Net;
 using Application.Helpers;
+using Application.Helpers.Attributes;
 using Application.UseCases.Lesson;
 using Application.UseCases.Lesson.Dtos;
 using Microsoft.AspNetCore.Mvc;
@@ -54,7 +55,7 @@ namespace pGroupeA03_api.Controllers
             catch (IndexOutOfRangeException e)
             {
                 Console.WriteLine(e);
-                throw new HttpListenerException(404, "Teacher not found");
+                throw new HttpListenerException(404, "Lesson not found");
             }
         }
 
@@ -86,6 +87,7 @@ namespace pGroupeA03_api.Controllers
             {
                 if (e.Errors.Count > 0)
                 {
+                    // Ne catch que la première erreur
                     throw e.Errors[0].Number switch
                     {
                         547 => new InvalidOperationException("Teacher gave at least one course."),
