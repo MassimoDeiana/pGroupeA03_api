@@ -1,5 +1,6 @@
 ﻿using Application.UseCases.Course.Dtos;
 using Application.UseCases.Interrogation.Dtos;
+using Application.UseCases.InterrogationReport.Dtos;
 using Application.UseCases.Lesson.Dtos;
 using Application.UseCases.Meeting.Dtos;
 using Application.UseCases.Note.Dtos;
@@ -55,6 +56,7 @@ namespace Application.UseCases.Utils
 
                 cfg.CreateMap<Domain.ResultReport, OutputDtoResult>();
 
+                cfg.CreateMap<Domain.InterrogationReport, OutputDtoInterrogationReport>();
             });
             return new AutoMapper.Mapper(config);
         }

@@ -6,6 +6,9 @@ namespace Application.UseCases.Interrogation.Dtos
     {
         [Required]
         public int IdLesson { get; set; }
+        
+        [Required]
+        public int IdTeacher { get; set; }
 
         [Required]
         [StringLength(50)]

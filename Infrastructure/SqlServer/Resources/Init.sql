@@ -93,6 +93,7 @@ primary key(idmeeting,idteacher)
 
 create table interrogation(
 idinterro int identity primary key,
+idteacher int not null foreign key(idteacher) references teacher(idteacher),
 idlesson int not null foreign key(idlesson) references lesson(idlesson),
 subject varchar(50) not null,
 total int not null
@@ -102,7 +103,7 @@ create table note(
 idnote int identity primary key,
 idteacher int not null foreign key(idteacher) references teacher(idteacher),
 idstudent int not null foreign key(idstudent) references student(idstudent),
-idinterro int not null foreign key(idinterro) references interrogation(idinterro),
+idinterro int not null foreign key(idinterro) references interrogation(idinterro) on delete cascade,
 datenote datetime not null,
 result float not null,
 message varchar(80)

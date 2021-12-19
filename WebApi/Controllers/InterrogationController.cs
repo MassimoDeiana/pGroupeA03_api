@@ -18,17 +18,20 @@ namespace pGroupeA03_api.Controllers
         private readonly UseCaseGetInterrogation _useCaseGetInterrogation;
         private readonly UseCaseGenerateInterrogation _useCaseGenerateInterrogation;
         private readonly UseCaseDeleteInterrogation _useCaseDeleteInterrogation;
+        private readonly UseCaseGetInterrogationByTeacher _useCaseGetInterrogationByTeacher;
 
         public InterrogationController(
             UseCaseCreateInterrogation useCaseCreateInterrogation, 
             UseCaseGetInterrogation useCaseGetInterrogation, 
             UseCaseGenerateInterrogation useCaseGenerateInterrogation, 
-            UseCaseDeleteInterrogation useCaseDeleteInterrogation)
+            UseCaseDeleteInterrogation useCaseDeleteInterrogation, 
+            UseCaseGetInterrogationByTeacher useCaseGetInterrogationByTeacher)
         {
             _useCaseCreateInterrogation = useCaseCreateInterrogation;
             _useCaseGetInterrogation = useCaseGetInterrogation;
             _useCaseGenerateInterrogation = useCaseGenerateInterrogation;
             _useCaseDeleteInterrogation = useCaseDeleteInterrogation;
+            _useCaseGetInterrogationByTeacher = useCaseGetInterrogationByTeacher;
         }
         
         [HttpGet]
@@ -54,7 +57,27 @@ namespace pGroupeA03_api.Controllers
             catch (IndexOutOfRangeException e)
             {
                 Console.WriteLine(e);
-                throw new HttpListenerException(404, "Interogation not found");
+                throw new HttpListenerException(404, "Interrogation not found");
+            }
+        }
+        
+        [HttpGet]
+        [Route("Teacher/{id:int}")]
+        [ProducesResponseType(201)]
+        public ActionResult<OutputDtoInterrogation> GetByTeacher(int id)
+        {
+            try
+            {
+                return StatusCode(201, _useCaseGetInterrogationByTeacher.Execute(
+                    new InputDtoGenerateInterrogationByTeacher
+                    {
+                        IdTeacher = id
+                    }));
+            }
+            catch (IndexOutOfRangeException e)
+            {
+                Console.WriteLine(e);
+                throw new HttpListenerException(404, "Interrogation not found");
             }
         }
 

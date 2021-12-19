@@ -3,6 +3,8 @@
     public class Interrogation
     {
         public int IdInterro { get; set; }
+        
+        public int IdTeacher { get; set; }
 
         public int IdLesson { get; set; }
 

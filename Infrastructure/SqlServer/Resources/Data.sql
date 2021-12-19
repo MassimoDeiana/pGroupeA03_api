@@ -20,9 +20,9 @@ insert into course(idlesson,starttime,endtime,idteacher,idclass) values (1,'2021
                                                                        (2,'2021-12-10T15:30:00','2021-12-10T17:00:00',2,2),
                                                                        (3,'2021-12-10T09:00:00','2021-12-10T11:00:00',3,1);
 
-insert into interrogation(idlesson,subject,total) values (1,'Matrix',20),
-                                                         (2,'Aggregation',38),
-                                                         (3, 'Ajax',10);
+insert into interrogation(idteacher,idlesson,subject,total) values (1, 1,'Matrix',20),
+                                                         (1, 2,'Aggregation',38),
+                                                         (2, 3, 'Ajax',10);
 
 insert into note(idteacher,idstudent,idinterro,datenote,result,message) values (1,3,1,'2021-12-10', 3, 'nul'),
                                                                                (1,3,2,'2021-13-10', 4, 'amélioration'),

@@ -4,6 +4,7 @@ using Application.Helpers.JwtMiddleware;
 using Application.Services;
 using Application.UseCases.Course;
 using Application.UseCases.Interrogation;
+using Application.UseCases.InterrogationReport;
 using Application.UseCases.Lesson;
 using Application.UseCases.Meeting;
 using Application.UseCases.Note;
@@ -16,6 +17,7 @@ using Domain;
 using Infrastructure.SqlServer.Repositories.Admin;
 using Infrastructure.SqlServer.Repositories.Course;
 using Infrastructure.SqlServer.Repositories.Interrogation;
+using Infrastructure.SqlServer.Repositories.InterrogationReport;
 using Infrastructure.SqlServer.Repositories.Lesson;
 using Infrastructure.SqlServer.Repositories.Meeting;
 using Infrastructure.SqlServer.Repositories.Note;
@@ -81,12 +83,16 @@ namespace pGroupeA03_api
 
             services.AddSingleton<InterrogationFactory>();
             services.AddSingleton<IEntityRepository<Interrogation>, InterrogationRepository>();
+            services.AddSingleton<IInterrogationRepository, InterrogationRepository>();
             
             services.AddSingleton<CourseFactory>();
             services.AddSingleton<IEntityRepository<Course>, CourseRepository>();
 
             services.AddSingleton<ResultFactory>();
             services.AddSingleton<IResultRepository, ResultRepository>();
+
+            services.AddSingleton<InterrogationReportFactory>();
+            services.AddSingleton<IInterrogationReportRepository, InterrogationReportRepository>();
 
             services.AddSingleton<AdminFactory>();
             services.AddSingleton<IEntityRepository<Admin>, AdminRepository>();
@@ -142,6 +148,7 @@ namespace pGroupeA03_api
                 services.AddSingleton<UseCaseGetInterrogation>();
                 services.AddSingleton<UseCaseGenerateInterrogation>();
                 services.AddSingleton<UseCaseDeleteInterrogation>();
+                services.AddSingleton<UseCaseGetInterrogationByTeacher>();
 
                 //COURSE
                 services.AddSingleton<UseCaseCreateCourse>();
@@ -157,6 +164,10 @@ namespace pGroupeA03_api
 
                 //RESULT
                 services.AddSingleton<UseCaseGenerateResult>();
+                
+                //INTERROGATIONREPORT
+                services.AddSingleton<UseCaseGetStudentsByInterro>();
+                services.AddSingleton<UseCaseDeleteNoteFromInterrogation>();
                 
                 services.AddControllers();
             

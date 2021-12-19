@@ -3,6 +3,5 @@
     public class InputDtoGetNote
     {
         public int IdStudent { get; set; }
-
     }
 }

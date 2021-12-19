@@ -19,15 +19,19 @@ namespace pGroupeA03_api.Controllers
         private readonly UseCaseGetNote _useCaseGetNote;
         private readonly UseCaseGenerateNote _useCaseGenerateNote;
         private readonly UseCaseDeleteNote _useCaseDeleteNote;
+        private readonly UseCaseDeleteNoteFromInterrogation _useCaseDeleteNoteFromInterrogation;
+
         public NoteController(UseCaseCreateNote useCaseCreateNote, 
             UseCaseGetNote useCaseGetNote, 
             UseCaseGenerateNote useCaseGenerateNote, 
-            UseCaseDeleteNote useCaseDeleteNote)
+            UseCaseDeleteNote useCaseDeleteNote, 
+            UseCaseDeleteNoteFromInterrogation useCaseDeleteNoteFromInterrogation)
         {
             _useCaseCreateNote = useCaseCreateNote;
             _useCaseGetNote = useCaseGetNote;
             _useCaseGenerateNote = useCaseGenerateNote;
             _useCaseDeleteNote = useCaseDeleteNote;
+            _useCaseDeleteNoteFromInterrogation = useCaseDeleteNoteFromInterrogation;
         }
         
         [Authorize(new [] {Permissions.Teacher,Permissions.Admin, Permissions.Student})]
@@ -77,6 +81,21 @@ namespace pGroupeA03_api.Controllers
                 {
                     IdNote = id
                 }))
+            {
+                return Ok();
+            }
+            return NotFound();
+        }
+        
+        [HttpDelete]
+        [Route("{idInterro:int}/{idStudent:int}")]
+        public ActionResult Delete(int idInterro, int idStudent)
+        {
+            if (_useCaseDeleteNoteFromInterrogation.Execute(
+                new InputDtoDeleteNoteFromInterrogation {
+                    IdInterro = idInterro,
+                    IdStudent = idStudent
+                })) 
             {
                 return Ok();
             }

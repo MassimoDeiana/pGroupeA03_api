@@ -44,7 +44,7 @@ namespace Infrastructure.SqlServer.Repositories.Note
             var command = new SqlCommand
             {
                 Connection = connection,
-                CommandText = $@"SELECT * FROM {TableName} WHERE {ColIdStudent} = @{ColIdStudent}"
+                CommandText = ReqGetById
             };
 
             command.Parameters.AddWithValue("@" + ColIdStudent, id);
@@ -57,6 +57,24 @@ namespace Infrastructure.SqlServer.Repositories.Note
             }
 
             return entities;
+        }
+        
+        //Supprime l'enregistrement dans note
+        public bool Delete(int idInterro, int idStudent)
+        {
+            using var connection = Database.GetConnection();
+            connection.Open();
+
+            var command = new SqlCommand
+            {
+                Connection = connection,
+                CommandText = ReqDelete
+            };
+            
+            command.Parameters.AddWithValue("@" + ColIdInterro, idInterro);
+            command.Parameters.AddWithValue("@" + ColIdStudent, idStudent);
+            
+            return command.ExecuteNonQuery() > 0;
         }
     }
 }
