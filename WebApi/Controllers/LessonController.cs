@@ -59,7 +59,7 @@ namespace pGroupeA03_api.Controllers
             }
         }
 
-        [Authorize(new [] {Permissions.Admin})]
+        [Authorize(new [] {Permissions.Admin, Permissions.Teacher})]
         [HttpPost]
         [ProducesResponseType(201)]
         public ActionResult<OutputDtoLesson> Create(InputDtoLesson dto)
@@ -67,7 +67,7 @@ namespace pGroupeA03_api.Controllers
             return StatusCode(201, _useCaseCreateLesson.Execute(dto));
         }
         
-        [Authorize(new [] {Permissions.Admin})]
+        [Authorize(new [] {Permissions.Admin, Permissions.Teacher})]
         [HttpDelete]
         [Route("{id:int}")]
         public ActionResult Delete(int id)
