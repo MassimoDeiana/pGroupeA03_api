@@ -77,7 +77,7 @@ idclass int not null foreign key(idclass) references schoolclass(idclass)
 
 create table course(
 idcourse int identity primary key,
-idlesson int not null foreign key(idlesson) references lesson(idlesson),
+idlesson int not null foreign key(idlesson) references lesson(idlesson) on delete cascade,
 starttime datetime not null,
 endtime datetime not null,
 idteacher int not null foreign key(idteacher) references teacher(idteacher),
@@ -94,7 +94,7 @@ primary key(idmeeting,idteacher)
 create table interrogation(
 idinterro int identity primary key,
 idteacher int not null foreign key(idteacher) references teacher(idteacher),
-idlesson int not null foreign key(idlesson) references lesson(idlesson),
+idlesson int not null foreign key(idlesson) references lesson(idlesson) on delete cascade,
 subject varchar(50) not null,
 total int not null
 );
