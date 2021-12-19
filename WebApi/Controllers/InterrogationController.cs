@@ -9,7 +9,6 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace pGroupeA03_api.Controllers
 {
-    [Authorize(new [] {Permissions.Teacher,Permissions.Admin})]
     [ApiController]
     [Route("api/[controller]")]
     public class InterrogationController : ControllerBase
@@ -34,6 +33,7 @@ namespace pGroupeA03_api.Controllers
             _useCaseGetInterrogationByTeacher = useCaseGetInterrogationByTeacher;
         }
         
+        [Authorize(new [] {Permissions.Teacher,Permissions.Admin})]
         [HttpGet]
         [ProducesResponseType(201)]
         public ActionResult<List<OutputDtoInterrogation>> GetAll()
@@ -41,6 +41,7 @@ namespace pGroupeA03_api.Controllers
             return StatusCode(201,_useCaseGetInterrogation.Execute());
         }
         
+        [Authorize(new [] {Permissions.Teacher,Permissions.Admin, Permissions.Student})]
         [HttpGet]
         [Route("{id:int}")]
         [ProducesResponseType(201)]
@@ -61,6 +62,7 @@ namespace pGroupeA03_api.Controllers
             }
         }
         
+        [Authorize(new [] {Permissions.Teacher,Permissions.Admin})]
         [HttpGet]
         [Route("Teacher/{id:int}")]
         [ProducesResponseType(201)]
@@ -81,13 +83,15 @@ namespace pGroupeA03_api.Controllers
             }
         }
 
+        [Authorize(new [] {Permissions.Teacher,Permissions.Admin})]
         [HttpPost]
         [ProducesResponseType(201)]
         public ActionResult<OutputDtoInterrogation> Create(InputDtoInterrogation dto)
         {
             return StatusCode(201, _useCaseCreateInterrogation.Execute(dto));
         }
-
+        
+        [Authorize(new [] {Permissions.Teacher,Permissions.Admin})]
         [HttpDelete]
         [Route("{id:int}")]
         public ActionResult Delete(int id)
