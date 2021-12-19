@@ -5,10 +5,10 @@ namespace Application.UseCases.Interrogation.Dtos
     public class InputDtoInterrogation
     {
         [Required]
-        public int IdLesson { get; set; }
+        public int IdTeacher { get; set; }
         
         [Required]
-        public int IdTeacher { get; set; }
+        public int IdLesson { get; set; }
 
         [Required]
         [StringLength(50)]
