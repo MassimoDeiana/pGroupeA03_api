@@ -110,8 +110,8 @@ namespace pGroupeA03_api.Controllers
         
         [Authorize(new [] {Permissions.Student,Permissions.Admin})]
         [HttpPut]
-        [Route("{id:int}/{idClass:int}")] //on aura un id pour la route
-        public ActionResult Update(int id, int idClass)
+        [Route("{idClass:int}/{id:int}")] //on aura un id pour la route
+        public ActionResult Update(int idClass, int id)
         {
             if (_useCaseUpdateStudent.Execute(id, idClass))
             {
