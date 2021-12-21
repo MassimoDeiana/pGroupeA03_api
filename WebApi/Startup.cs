@@ -87,6 +87,8 @@ namespace pGroupeA03_api
             
             services.AddSingleton<CourseFactory>();
             services.AddSingleton<IEntityRepository<Course>, CourseRepository>();
+            services.AddSingleton<ICourseRepository, CourseRepository>();
+
 
             services.AddSingleton<ResultFactory>();
             services.AddSingleton<IResultRepository, ResultRepository>();
@@ -155,6 +157,7 @@ namespace pGroupeA03_api
                 services.AddSingleton<UseCaseGetCourse>();
                 services.AddSingleton<UseCaseGenerateCourse>();
                 services.AddSingleton<UseCaseDeleteCourse>();
+                services.AddSingleton<UseCaseGetCourseByTeacher>();
                 
                 //LESSON
                 services.AddSingleton<UseCaseCreateLesson>();

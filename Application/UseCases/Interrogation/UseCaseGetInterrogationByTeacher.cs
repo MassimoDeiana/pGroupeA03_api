@@ -2,7 +2,7 @@
 using System.Linq;
 using Application.UseCases.Interrogation.Dtos;
 using Application.UseCases.Utils;
-using Infrastructure.SqlServer.Repositories.Interrogation;
+using Infrastructure.SqlServer.Repositories.Interrogation; 
 
 namespace Application.UseCases.Interrogation
 {

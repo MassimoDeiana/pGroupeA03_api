@@ -19,16 +19,19 @@ namespace pGroupeA03_api.Controllers
         private readonly UseCaseGetCourse _useCaseGetCourse;
         private readonly UseCaseGenerateCourse _useCaseGenerateCourse;
         private readonly UseCaseDeleteCourse _useCaseDeleteCourse;
+        private readonly UseCaseGetCourseByTeacher _useCaseGetCourseByTeacher;
 
         public CourseController(UseCaseCreateCourse useCaseCreateCourse,
             UseCaseGetCourse useCaseGetCourse,
             UseCaseGenerateCourse useCaseGenerateCourse,
-            UseCaseDeleteCourse useCaseDeleteCourse) 
+            UseCaseDeleteCourse useCaseDeleteCourse,
+            UseCaseGetCourseByTeacher useCaseGetCourseByTeacher) 
         {
             _useCaseCreateCourse = useCaseCreateCourse;
             _useCaseGetCourse = useCaseGetCourse;
             _useCaseGenerateCourse = useCaseGenerateCourse;
             _useCaseDeleteCourse = useCaseDeleteCourse;
+            _useCaseGetCourseByTeacher = useCaseGetCourseByTeacher;
         }
 
         [HttpGet]
@@ -54,6 +57,27 @@ namespace pGroupeA03_api.Controllers
             {
                 Console.WriteLine(e);
                 throw new HttpListenerException(404, "Meeting not found");
+            }
+        }
+        
+        [Authorize(new [] {Permissions.Teacher,Permissions.Admin})]
+        [HttpGet]
+        [Route("Teacher/{id:int}")]
+        [ProducesResponseType(201)]
+        public ActionResult<OutputDtoCourse> GetByTeacher(int id)
+        {
+            try
+            {
+                return StatusCode(201, _useCaseGetCourseByTeacher.Execute(
+                    new InputDtoGenerateCourseByTeacher()
+                    {
+                        IdTeacher = id
+                    }));
+            }
+            catch (IndexOutOfRangeException e)
+            {
+                Console.WriteLine(e);
+                throw new HttpListenerException(404, "Interrogation not found");
             }
         }
 

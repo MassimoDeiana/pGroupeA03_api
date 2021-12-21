@@ -13,6 +13,7 @@
         
         private static readonly string ReqCreate = $@"INSERT INTO {TableName}({ColIdLesson},{ColStart},{ColEnd},{ColIdTeacher},{ColIdClass}) OUTPUT INSERTED.{ColId} 
                                                     VALUES(@{ColIdLesson},@{ColStart},@{ColEnd},@{ColIdTeacher},@{ColIdClass})";
-        
+        private static readonly string ReqGetByTeacher = $@"SELECT * FROM {TableName} WHERE {ColIdTeacher} = @{ColIdTeacher}";
+
     }
 }
