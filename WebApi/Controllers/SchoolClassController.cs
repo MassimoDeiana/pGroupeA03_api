@@ -10,7 +10,6 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace pGroupeA03_api.Controllers
 {
-    [Authorize(new [] {Permissions.Admin,Permissions.Teacher})]
     [ApiController]
     [Route("api/[controller]")]
     public class SchoolClassController : ControllerBase
@@ -32,12 +31,14 @@ namespace pGroupeA03_api.Controllers
             _useCaseDeleteSchoolClass = useCaseDeleteSchoolClass;
         }
 
+        [Authorize(new [] {Permissions.Admin,Permissions.Teacher})]
         [HttpGet]
         public ActionResult<List<OutputDtoSchoolClass>> GetAll()
         {
             return _useCaseGetSchoolClass.Execute();
         }
         
+        [Authorize(new [] {Permissions.Admin,Permissions.Teacher, Permissions.Student})]
         [HttpGet]
         [Route("{id:int}")]
         public ActionResult<OutputDtoSchoolClass> GetById(int id)
@@ -57,7 +58,8 @@ namespace pGroupeA03_api.Controllers
             }
             
         }
-
+        
+        [Authorize(new [] {Permissions.Admin,Permissions.Teacher})]
         [HttpPost]
         [ProducesResponseType(201)]
         public ActionResult<OutputDtoSchoolClass> Create(InputDtoSchoolClass dto)
@@ -65,6 +67,7 @@ namespace pGroupeA03_api.Controllers
             return StatusCode(201, _useCaseCreateSchoolClass.Execute(dto));
         }
 
+        [Authorize(new [] {Permissions.Admin,Permissions.Teacher})]
         [HttpDelete]
         [Route("{id:int}")]
         public ActionResult Delete(int id)
