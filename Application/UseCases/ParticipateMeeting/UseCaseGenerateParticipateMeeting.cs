@@ -18,7 +18,7 @@ namespace Application.UseCases.ParticipateMeeting
         
         public List<OutputDtoParticipateMeeting> Execute(InputDtoGenerateParticipateMeeting dto)
         {
-            var output = _participateMeetingRepository.GetById(dto.IdMeeting);
+            var output = _participateMeetingRepository.GetById(dto.IdTeacher);
 
             return output.Select(t => Mapper.GetInstance().Map<OutputDtoParticipateMeeting>(t)).ToList();
         }

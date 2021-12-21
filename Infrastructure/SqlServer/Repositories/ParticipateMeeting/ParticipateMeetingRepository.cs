@@ -40,10 +40,10 @@ namespace Infrastructure.SqlServer.Repositories.ParticipateMeeting
             var command = new SqlCommand
             {
                 Connection = connection,
-                CommandText = $@"SELECT * FROM {TableName} WHERE {ColIdMeeting} = @{ColIdMeeting}"
+                CommandText = ReqGetByIdTeacher
             };
 
-            command.Parameters.AddWithValue("@" + ColIdMeeting, id);
+            command.Parameters.AddWithValue("@" + ColIdTeacher, id);
             
             var reader = command.ExecuteReader(CommandBehavior.CloseConnection);
 

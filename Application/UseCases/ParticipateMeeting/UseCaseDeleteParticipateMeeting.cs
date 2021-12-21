@@ -4,7 +4,7 @@ using Infrastructure.SqlServer.Utils;
 
 namespace Application.UseCases.ParticipateMeeting
 {
-    public class UseCaseDeleteParticipateMeeting : IDeleting<InputDtoGenerateParticipateMeeting>
+    public class UseCaseDeleteParticipateMeeting : IDeleting<InputDtoDeleteParticipateMeetingByMeeting>
     {
         private readonly IEntityRepository<Domain.ParticipateMeeting> _participateMeetingRepository;
 
@@ -13,7 +13,7 @@ namespace Application.UseCases.ParticipateMeeting
             _participateMeetingRepository = participateMeetingRepository;
         }
 
-        public bool Execute(InputDtoGenerateParticipateMeeting dto)
+        public bool Execute(InputDtoDeleteParticipateMeetingByMeeting dto)
         {
             return _participateMeetingRepository.Delete(dto.IdMeeting);
         }

@@ -13,7 +13,7 @@ namespace Application.UseCases.Student.Dtos
         
         [Required]
         [StringLength(50)]
-        public string Firstname { get; set; }
+        public string FirstName { get; set; }
         
         [Required]
         [BirthDate]

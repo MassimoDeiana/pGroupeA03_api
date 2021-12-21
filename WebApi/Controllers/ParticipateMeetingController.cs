@@ -45,7 +45,7 @@ namespace pGroupeA03_api.Controllers
                 return _useCaseGenerateParticipateMeeting.Execute(
                     new InputDtoGenerateParticipateMeeting
                     {
-                        IdMeeting = id
+                        IdTeacher = id
                     });
             }
             catch (IndexOutOfRangeException e)
@@ -68,7 +68,7 @@ namespace pGroupeA03_api.Controllers
         public ActionResult Delete(int id)
         {
             if (_useCaseDeleteParticipateMeeting.Execute(
-                new InputDtoGenerateParticipateMeeting
+                new InputDtoDeleteParticipateMeetingByMeeting()
                 {
                     IdMeeting = id
                 }))

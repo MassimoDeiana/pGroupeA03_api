@@ -9,7 +9,7 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace pGroupeA03_api.Controllers
 {
-    [Authorize(new [] {Permissions.Teacher, Permissions.Admin})]
+   
     [ApiController]
     [Route("api/[controller]")]
     
@@ -34,6 +34,7 @@ namespace pGroupeA03_api.Controllers
             _useCaseGetCourseByTeacher = useCaseGetCourseByTeacher;
         }
 
+        [Authorize(new [] {Permissions.Teacher, Permissions.Admin, Permissions.Student})]
         [HttpGet]
         [ProducesResponseType(201)]
         public ActionResult<List<OutputDtoCourse>> GetAll()
@@ -41,6 +42,7 @@ namespace pGroupeA03_api.Controllers
             return StatusCode(201,_useCaseGetCourse.Execute());
         }
 
+        [Authorize(new [] {Permissions.Teacher, Permissions.Admin})]
         [HttpGet]
         [Route("{id:int}")]
         [ProducesResponseType(201)]
@@ -59,6 +61,7 @@ namespace pGroupeA03_api.Controllers
                 throw new HttpListenerException(404, "Meeting not found");
             }
         }
+        
         
         [Authorize(new [] {Permissions.Teacher,Permissions.Admin})]
         [HttpGet]
@@ -81,6 +84,7 @@ namespace pGroupeA03_api.Controllers
             }
         }
 
+        [Authorize(new [] {Permissions.Teacher, Permissions.Admin})]
         [HttpPost]
         [ProducesResponseType(201)]
         public ActionResult<OutputDtoCourse> Create(InputDtoCourse dto)
@@ -88,6 +92,7 @@ namespace pGroupeA03_api.Controllers
             return StatusCode(201, _useCaseCreateCourse.Execute(dto));
         }
         
+        [Authorize(new [] {Permissions.Teacher, Permissions.Admin})]
         [HttpDelete]
         [Route("{id:int}")]
         public ActionResult Delete(int id)

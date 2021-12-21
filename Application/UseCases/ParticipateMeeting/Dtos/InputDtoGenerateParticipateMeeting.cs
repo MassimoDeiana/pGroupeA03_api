@@ -2,6 +2,6 @@
 {
     public class InputDtoGenerateParticipateMeeting
     {
-        public int IdMeeting { get; set; }
+        public int IdTeacher { get; set; }
     }
 }
