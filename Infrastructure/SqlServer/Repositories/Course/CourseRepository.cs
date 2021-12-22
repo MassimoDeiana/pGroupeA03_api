@@ -32,7 +32,11 @@ namespace Infrastructure.SqlServer.Repositories.Course
 
             return t;
         }
-        
+       
+        /**
+         * <summary>Récupère les cours en fonction du professeur</summary>
+         * <param name="id">L'id du professeur</param>
+         */
         public List<Domain.Course> GetByTeacher(int id)
         {
             var entities = new List<Domain.Course>();

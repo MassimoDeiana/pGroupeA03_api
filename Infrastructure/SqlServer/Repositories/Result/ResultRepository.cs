@@ -13,6 +13,10 @@ namespace Infrastructure.SqlServer.Repositories.Result
             _factory = factory;
         }
 
+        /**
+         * <summary>Récupère les notes de l'élève</summary>
+         * <param name="id">L'id de l'élève</param>
+         */
         public List<Domain.ResultReport> GetById(int id)
         {
             var entities = new List<Domain.ResultReport>();
@@ -22,10 +26,7 @@ namespace Infrastructure.SqlServer.Repositories.Result
             var command = new SqlCommand
             {
                 Connection = connection,
-                CommandText = $@"
-                select {TableName}.{ColIdStudent},{TableName}.{ColIdInterro},{TableName}.{ColResult},interrogation.total, interrogation.idlesson, {TableName}.{ColMessage}
-                from {TableName} inner join interrogation on {TableName}.{ColIdInterro} = interrogation.{ColIdInterro} 
-                where {ColIdStudent} = @{ColIdStudent}"
+                CommandText = ReqByStudent
             };
 
             command.Parameters.AddWithValue("@" + ColIdStudent, id);

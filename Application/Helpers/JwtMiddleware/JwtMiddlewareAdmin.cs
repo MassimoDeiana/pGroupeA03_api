@@ -22,21 +22,28 @@ namespace Application.Helpers.JwtMiddleware
         }
         
          /**
-          * Méthode permettant de vérifier si un token doit être précisé dans l'en-tête de la requête
-          * Si oui, la méthode AttachUserToContext est appelée
+          * <summary>Méthode permettant de vérifier si un token doit être précisé dans l'en-tête de la requête
+          * Si oui, la méthode AttachUserToContext est appelée</summary>
+          * <param name="context">Le contexte de la requête http</param>
+          * <param name="service">Le service à utiliser lors de l'appel de AttachUserToContext</param>
           */
-         public async Task Invoke(HttpContext context, IAdminService adminService)
+         public async Task Invoke(HttpContext context, IAdminService service)
         {
             var token = context.Request.Headers["Authorization"].FirstOrDefault()?.Split(" ").Last();
 
             if (token != null)
-                AttachUserToContext(context, adminService, token);
+                AttachUserToContext(context, service, token);
 
             await _next(context);
         }
          
-          //Méthode permettant de valider le token, d'extraire l'id de l'utilisateur et de l'attacher au contexte
-          private void AttachUserToContext(HttpContext context, IAdminService adminService, string token)
+          /**
+           * <summary>Méthode permettant de valider le token, d'extraire l'id de l'utilisateur et d'attacher l'utilisateur au contexte</summary>
+           * <param name="context">Le contexte de la requête http</param>
+           * <param name="service">Le service utilisé pour récupérer l'utilisateur</param>
+           * <param name="token">Le token</param>
+           */
+          private void AttachUserToContext(HttpContext context, IAdminService service, string token)
         {
             try
             {
@@ -56,7 +63,7 @@ namespace Application.Helpers.JwtMiddleware
                 var adminId = int.Parse(jwtToken.Claims.First(x => x.Type == "idadmin").Value);
 
                 // attach user to context on successful jwt validation
-                context.Items["Admin"] = adminService.GetById(adminId);
+                context.Items["Admin"] = service.GetById(adminId);
             }
             catch
             {

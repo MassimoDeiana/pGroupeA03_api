@@ -5,7 +5,7 @@ using System.Data.SqlClient;
 namespace Infrastructure.SqlServer.Utils
 {
     /**
-     * Classe abstraite automatisant les méthodes GetAll, GetById et Delete. Il faudra toutefois implémenter la méthode Create dans chaque sous-classe concrète
+     * <summary>Classe abstraite automatisant les méthodes GetAll, GetById et Delete. Il faudra toutefois implémenter la méthode Create dans chaque sous-classe concrète</summary>
      */
     public abstract class EntityRepository<T> : IEntityRepository<T>
     {
@@ -24,7 +24,7 @@ namespace Infrastructure.SqlServer.Utils
         }
 
         /**
-         * Méthode remplissant la variable contenant les colonnes en fonction de la table donnée
+         * <summary>Méthode remplissant la variable contenant les colonnes en fonction de la table donnée</summary>
          */
         private void FillTableColumns()
         {
@@ -42,7 +42,8 @@ namespace Infrastructure.SqlServer.Utils
         }
 
         /**
-         * GetAll générique renvoyant la liste des enregistrements contenus dans la table
+         * <summary>GetAll générique renvoyant la liste des enregistrements contenus dans la table</summary>
+         * <returns>Les enregistrements de la table</returns>
          */
         public List<T> GetAll()
         {
@@ -67,7 +68,9 @@ namespace Infrastructure.SqlServer.Utils
         }
         
         /**
-         * GetById générique renvoyant l'enregistrement contenu dans la table ayant l'id spécifié en argument
+         * <summary>GetById générique renvoyant l'enregistrement contenu dans la table ayant l'id spécifié en argument</summary>
+         * <param name="id">L'id de l'enregistrement à chercher dans la table</param>
+         * <returns>L'enregistrement si l'id existe</returns>
          */
         public T GetById(int id)
         {
@@ -89,12 +92,15 @@ namespace Infrastructure.SqlServer.Utils
         }
 
         /**
-         * Méthode abstraite à redéfinir par les classes concrêtes héritant de cette classe
+         * <summary>Méthode abstraite à redéfinir par les classes concrêtes héritant de cette classe</summary>
+         * <param name="t">L'objet à créer</param>
+         * <returns>L'objet après création dans la base de données</returns>
          */
         public abstract T Create(T t);
 
         /**
-         * Delete générique retirant l'enregistrement contenu dans la table ayant l'id spécifié dans la table
+         * <summary>Delete générique retirant l'enregistrement contenu dans la table ayant l'id spécifié dans la table</summary>
+         * <returns>vrai si supprimé, sinon faux</returns>
          */
         public bool Delete(int id)
         {

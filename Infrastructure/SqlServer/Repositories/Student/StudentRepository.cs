@@ -36,6 +36,11 @@ namespace Infrastructure.SqlServer.Repositories.Student
             return t;
         }
 
+        /**
+         * <summary>Modifie la classe de l'élève</summary>
+         * <param name="id">L'id de l'élève</param>
+         * <param name="idClass">L'id de la classe</param>
+         */
         public bool Update(int id, int idClass)
         {
             using var connection = Database.GetConnection();
@@ -53,6 +58,10 @@ namespace Infrastructure.SqlServer.Repositories.Student
             return command.ExecuteNonQuery() > 0;
         }
 
+        /**
+         * <summary>Récupère les étudiants en fonction de la classe</summary>
+         * <param name="idClass">L'id de la classe</param>
+         */
         public List<Domain.Student> GetByClass(int idClass)
         {
             var entities = new List<Domain.Student>();
@@ -73,7 +82,6 @@ namespace Infrastructure.SqlServer.Repositories.Student
             {
                 entities.Add(_factory.CreateFromSqlReader(reader));
             }
-
             return entities; 
         }
     }

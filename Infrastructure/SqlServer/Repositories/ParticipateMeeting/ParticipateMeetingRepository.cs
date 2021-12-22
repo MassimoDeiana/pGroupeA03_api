@@ -31,6 +31,10 @@ namespace Infrastructure.SqlServer.Repositories.ParticipateMeeting
             return t;
         }
 
+        /**
+         * <summary>Récupère les meetings auxquels participent le professeur</summary>
+         * <param name="id">L'id du professeur</param>
+         */
         public new List<Domain.ParticipateMeeting> GetById(int id)
         {
             var entities = new List<Domain.ParticipateMeeting>();

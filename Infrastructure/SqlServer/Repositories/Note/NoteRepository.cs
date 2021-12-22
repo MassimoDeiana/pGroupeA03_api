@@ -35,6 +35,11 @@ namespace Infrastructure.SqlServer.Repositories.Note
             
             return t;
         }
+        
+        /**
+         * <summary>Récupère la liste de notes en fonction de l'id de l'élève</summary>
+         * <param name="id">l'id de l'élève</param> 
+         */
         public new List<Domain.Note> GetById(int id)
         {
             var entities = new List<Domain.Note>();
@@ -59,7 +64,11 @@ namespace Infrastructure.SqlServer.Repositories.Note
             return entities;
         }
         
-        //Supprime l'enregistrement dans note
+        /**
+         * <summary>Supprime la note de l'élève</summary>
+         * <param name="idInterro">L'id de l'interrogation</param> 
+         * <param name="idStudent">L'id de l'élève</param> 
+         */
         public bool Delete(int idInterro, int idStudent)
         {
             using var connection = Database.GetConnection();

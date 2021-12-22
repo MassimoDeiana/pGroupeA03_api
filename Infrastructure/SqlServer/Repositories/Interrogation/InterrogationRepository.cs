@@ -33,7 +33,10 @@ namespace Infrastructure.SqlServer.Repositories.Interrogation
             return t;
         }
 
-        //Méthode permettant de récupérer toutes les interrogations d'un professeur
+        /**
+         * <summary>Méthode permettant de récupérer toutes les interrogations d'un professeur</summary>
+         * <param name="id">L'id du professeur</param>
+         */
         public List<Domain.Interrogation> GetByTeacher(int id)
         {
             var entities = new List<Domain.Interrogation>();

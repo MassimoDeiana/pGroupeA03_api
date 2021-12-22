@@ -23,6 +23,10 @@ namespace Application.Services
             _appSettings = appSettings.Value;
         }
 
+        /**
+         * <summary>Vérifie si le mail et le mot de passe encodé existe dans la base de données.
+         * Si oui, la méthode renvoie un objet contenant l'id de l'utilisateur et un token</summary>
+         */
         public OutputDtoTokenStudent Authenticate(InputDtoGenerateTokenStudent model)
         {
             var student = _studentRepository.GetAll()
@@ -42,6 +46,10 @@ namespace Application.Services
             return _studentRepository.GetById(id);
         }
         
+        /**
+         * <summary>Génère un token en fonction du secret stocké et de l'utilisateur dans appsettings.json</summary>
+         * <<param name="student">L'utilisateur</param>
+         */
         private string GenerateJwtToken(Student student)
         {
             // generate token that is valid for 7 days
