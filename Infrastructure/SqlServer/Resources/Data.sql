@@ -33,8 +33,5 @@ insert into note(idteacher,idstudent,idinterro,datenote,result,message) values (
 
 insert into admin(mail,password) values ('OrlandoPalermo@gmail.com','password1');
 
-insert into participatemeeting(idmeeting,idteacher) values(1,1),
-                                                          (1,2),
-                                                          (1,3),
-                                                           (2,2);
+insert into participatemeeting(idmeeting,idteacher) values(1,1);
                                                           

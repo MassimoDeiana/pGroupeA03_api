@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Data.SqlClient;
 using System.Net;
 using Application.Helpers;
 using Application.Helpers.Attributes;
@@ -60,7 +61,15 @@ namespace pGroupeA03_api.Controllers
         [ProducesResponseType(201)]
         public ActionResult<OutputDtoParticipateMeeting> Create(InputDtoParticipateMeeting dto)
         {
-            return StatusCode(201, _useCaseCreateParticipateMeeting.Execute(dto));
+            try
+            {
+                return StatusCode(201, _useCaseCreateParticipateMeeting.Execute(dto));
+            }
+            catch (SqlException e)
+            {
+                Console.WriteLine(e);
+                throw new HttpListenerException(501, "Teacher already in this meeting");
+            }
         }
 
         [HttpDelete]
