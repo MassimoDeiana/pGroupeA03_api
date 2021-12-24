@@ -5,6 +5,10 @@ namespace Infrastructure.SqlServer.Repositories.SchoolClass
 {
     public class SchoolClassFactory : IDomainFactory<Domain.SchoolClass>
     {
+        /**
+         * <summary>Méthode qui lit le résultat d'une requête et transforme les informations en un objet
+         * <returns>SchoolClass</returns></summary>
+         */
         public Domain.SchoolClass CreateFromSqlReader(SqlDataReader reader)
         {
             return new Domain.SchoolClass

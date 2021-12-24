@@ -5,6 +5,10 @@ namespace Infrastructure.SqlServer.Repositories.Meeting
 {
     public class MeetingFactory : IDomainFactory<Domain.Meeting>
     {
+        /**
+         * <summary>Méthode qui lit le résultat d'une requête et transforme les informations en un objet
+         * <returns>Meeting</returns></summary>
+         */
         public Domain.Meeting CreateFromSqlReader(SqlDataReader reader)
         {
             return new Domain.Meeting

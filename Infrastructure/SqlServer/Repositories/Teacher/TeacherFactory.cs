@@ -4,8 +4,11 @@ using Infrastructure.SqlServer.Utils;
 namespace Infrastructure.SqlServer.Repositories.Teacher
 {
     public class TeacherFactory : IDomainFactory<Domain.Teacher>
-
-    { 
+    {
+        /**
+         * <summary>Méthode qui lit le résultat d'une requête et transforme les informations en un objet
+         * <returns>Teacher</returns></summary>
+         */
         public Domain.Teacher CreateFromSqlReader(SqlDataReader reader)
         {
             return new Domain.Teacher

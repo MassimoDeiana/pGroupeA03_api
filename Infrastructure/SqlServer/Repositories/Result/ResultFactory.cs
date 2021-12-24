@@ -5,6 +5,10 @@ namespace Infrastructure.SqlServer.Repositories.Result
 {
     public class ResultFactory : IDomainFactory<Domain.ResultReport>
     {
+        /**
+         * <summary>Méthode qui lit le résultat d'une requête et transforme les informations en un objet
+         * <returns>ResultReport</returns></summary>
+         */
         public Domain.ResultReport CreateFromSqlReader(SqlDataReader reader)
         {
             return new Domain.ResultReport

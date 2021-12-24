@@ -5,6 +5,10 @@ namespace Infrastructure.SqlServer.Repositories.InterrogationReport
 {
     public class InterrogationReportFactory : IDomainFactory<Domain.InterrogationReport>
     {
+        /**
+         * <summary>Méthode qui lit le résultat d'une requête et transforme les informations en un objet
+         * <returns>InterrogationReport</returns></summary>
+         */
         public Domain.InterrogationReport CreateFromSqlReader(SqlDataReader reader)
         {
             return new Domain.InterrogationReport
