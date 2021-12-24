@@ -30,7 +30,7 @@ namespace pGroupeA03_api.Controllers
             _useCaseGenerateLesson = useCaseGenerateLesson;
         }
         
-        [Authorize(new [] {Permissions.Teacher, Permissions.Admin, Permissions.Student})]
+        [Authorize(new [] {Permissions.Teacher, Permissions.Student})]
         [HttpGet]
         [ProducesResponseType(201)]
         public ActionResult<List<OutputDtoLesson>> GetAll()
@@ -38,7 +38,7 @@ namespace pGroupeA03_api.Controllers
             return StatusCode(201,_useCaseGetLesson.Execute());
         }
         
-        [Authorize(new [] {Permissions.Teacher, Permissions.Admin, Permissions.Student})]
+        [Authorize(new [] {Permissions.Teacher, Permissions.Student})]
         [HttpGet]
         [Route("{id:int}")]
         [ProducesResponseType(201)]
@@ -59,7 +59,7 @@ namespace pGroupeA03_api.Controllers
             }
         }
 
-        [Authorize(new [] {Permissions.Admin, Permissions.Teacher})]
+        [Authorize(new [] {Permissions.Teacher})]
         [HttpPost]
         [ProducesResponseType(201)]
         public ActionResult<OutputDtoLesson> Create(InputDtoLesson dto)
@@ -67,7 +67,7 @@ namespace pGroupeA03_api.Controllers
             return StatusCode(201, _useCaseCreateLesson.Execute(dto));
         }
         
-        [Authorize(new [] {Permissions.Admin, Permissions.Teacher})]
+        [Authorize(new [] {Permissions.Teacher})]
         [HttpDelete]
         [Route("{id:int}")]
         public ActionResult Delete(int id)

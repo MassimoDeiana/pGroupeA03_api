@@ -9,7 +9,7 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace pGroupeA03_api.Controllers
 {
-    [Authorize(new [] {Permissions.Student, Permissions.Teacher,Permissions.Admin})]
+    [Authorize(new [] {Permissions.Student, Permissions.Teacher})]
     [ApiController]
     [Route("api/[controller]")]
     public class ResultController : ControllerBase

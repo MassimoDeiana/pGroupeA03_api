@@ -9,7 +9,7 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace pGroupeA03_api.Controllers
 {
-    [Authorize(new [] {Permissions.Teacher,Permissions.Admin})]
+    [Authorize(new [] {Permissions.Teacher})]
     [ApiController]
     [Route("api/[controller]")]
     
@@ -34,7 +34,7 @@ namespace pGroupeA03_api.Controllers
             _useCaseDeleteNoteFromInterrogation = useCaseDeleteNoteFromInterrogation;
         }
         
-        [Authorize(new [] {Permissions.Teacher,Permissions.Admin, Permissions.Student})]
+        [Authorize(new [] {Permissions.Teacher, Permissions.Student})]
         [HttpGet]
         [ProducesResponseType(201)]
         public ActionResult<List<OutputDtoNote>> GetAll()
@@ -42,7 +42,7 @@ namespace pGroupeA03_api.Controllers
             return StatusCode(201,_useCaseGetNote.Execute());
         }
         
-        [Authorize(new [] {Permissions.Student, Permissions.Teacher,Permissions.Admin})]
+        [Authorize(new [] {Permissions.Student, Permissions.Teacher})]
         [HttpGet]
         [Route("{id:int}")]
         [ProducesResponseType(201)]
@@ -63,7 +63,7 @@ namespace pGroupeA03_api.Controllers
             }
         }
 
-        [Authorize(new [] {Permissions.Teacher,Permissions.Admin})]
+        [Authorize(new [] {Permissions.Teacher})]
         [HttpPost]
         [ProducesResponseType(201)]
         public ActionResult<OutputDtoNote> Create(InputDtoNote dto)
@@ -71,7 +71,7 @@ namespace pGroupeA03_api.Controllers
             return StatusCode(201, _useCaseCreateNote.Execute(dto));
         }
         
-        [Authorize(new [] {Permissions.Teacher,Permissions.Admin})]
+        [Authorize(new [] {Permissions.Teacher})]
         [HttpDelete]
         [Route("{id:int}")]
         public ActionResult Delete(int id)
