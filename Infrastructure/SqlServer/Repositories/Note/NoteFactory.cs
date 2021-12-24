@@ -5,6 +5,10 @@ namespace Infrastructure.SqlServer.Repositories.Note
 {
     public class NoteFactory : IDomainFactory<Domain.Note>
     {
+        /**
+         * <summary>Méthode qui lit le résultat d'une requête et transforme les informations en un objet
+         * <returns>Note</returns></summary>
+         */
         public Domain.Note CreateFromSqlReader(SqlDataReader reader)
         {
             return new Domain.Note

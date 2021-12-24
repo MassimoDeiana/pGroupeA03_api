@@ -5,6 +5,10 @@ namespace Infrastructure.SqlServer.Repositories.Course
 {
     public class CourseFactory : IDomainFactory<Domain.Course>
     {
+        /**
+         * <summary>Méthode qui lit le résultat d'une requête et transforme les informations en un objet
+         * <returns>Course</returns></summary>
+         */
         public Domain.Course CreateFromSqlReader(SqlDataReader reader)
         {
             return new Domain.Course
